@@ -44,3 +44,16 @@ C:\Users\amets\OneDrive\Рабочий стол\КУРСОВАЯ\Sample8\Sample\
 C:\Users\amets\OneDrive\Рабочий стол\КУРСОВАЯ\Sample8\Sample\Sample\obj\Debug\Sample.csproj.CoreCompileInputs.cache
 C:\Users\amets\OneDrive\Рабочий стол\КУРСОВАЯ\Sample8\Sample\Sample\obj\Debug\Sample.exe
 C:\Users\amets\OneDrive\Рабочий стол\КУРСОВАЯ\Sample8\Sample\Sample\obj\Debug\Sample.pdb
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\bin\Debug\Sample.exe.config
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\bin\Debug\Sample.exe
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.csproj.AssemblyReference.cache
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.CheckAdmin.resources
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.Form1.resources
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.Form2.resources
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.Form3.resources
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.Properties.Resources.resources
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.csproj.GenerateResource.cache
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.csproj.CoreCompileInputs.cache
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.exe
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\obj\Debug\Sample.pdb
+C:\Users\amets\OneDrive\Рабочий стол\curs-git\Sample\Sample\bin\Debug\Sample.pdb
