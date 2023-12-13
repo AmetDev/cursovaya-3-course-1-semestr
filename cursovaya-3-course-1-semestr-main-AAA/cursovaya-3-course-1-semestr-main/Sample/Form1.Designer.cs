@@ -32,15 +32,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.таблицыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,29 +42,21 @@
             this.видыНарушенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.инспекторToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.testDataSet = new Sample.TestDataSet();
-            this.автомобилиBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.автомобилиTableAdapter = new Sample.TestDataSetTableAdapters.автомобилиTableAdapter();
             this.кодавтомобиляDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.кодвладельцаDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.модельDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.госномерDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.датапроизводстваDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.владельцыBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.владельцыTableAdapter = new Sample.TestDataSetTableAdapters.владельцыTableAdapter();
+            this.автомобилиBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.testDataSet = new Sample.TestDataSet();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.кодвладельцаDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.имяDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.фамилияDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.отчествоDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.категорияправDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.фактынарушенияBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.факты_нарушенияTableAdapter = new Sample.TestDataSetTableAdapters.факты_нарушенияTableAdapter();
+            this.владельцыBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.коднарушенияDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.кодавтомобиляDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.кодинспектораDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,32 +65,39 @@
             this.датанарушенияDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.фиоводителяDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.правоУправленияDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.инспекторBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.инспекторTableAdapter = new Sample.TestDataSetTableAdapters.ИнспекторTableAdapter();
+            this.фактынарушенияBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.кодинспектораDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.фиоинспектораDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.видынарушенияBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.виды_нарушенияTableAdapter = new Sample.TestDataSetTableAdapters.виды_нарушенияTableAdapter();
+            this.инспекторBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.кодвиданарушенияDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.наименованиевиданарушенияDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.размерШтрафаDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.видынарушенияBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button6 = new System.Windows.Forms.Button();
+            this.автомобилиTableAdapter = new Sample.TestDataSetTableAdapters.автомобилиTableAdapter();
+            this.владельцыTableAdapter = new Sample.TestDataSetTableAdapters.владельцыTableAdapter();
+            this.факты_нарушенияTableAdapter = new Sample.TestDataSetTableAdapters.факты_нарушенияTableAdapter();
+            this.инспекторTableAdapter = new Sample.TestDataSetTableAdapters.ИнспекторTableAdapter();
+            this.виды_нарушенияTableAdapter = new Sample.TestDataSetTableAdapters.виды_нарушенияTableAdapter();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.testDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.автомобилиBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.testDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.владельцыBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.фактынарушенияBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.инспекторBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.видынарушенияBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(497, 300);
+            this.button1.Location = new System.Drawing.Point(799, 109);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(204, 23);
             this.button1.TabIndex = 1;
@@ -116,7 +107,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(497, 329);
+            this.button2.Location = new System.Drawing.Point(799, 138);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(204, 23);
             this.button2.TabIndex = 2;
@@ -126,7 +117,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(497, 358);
+            this.button3.Location = new System.Drawing.Point(799, 167);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(204, 23);
             this.button3.TabIndex = 3;
@@ -134,37 +125,9 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(496, 99);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(204, 20);
-            this.textBox1.TabIndex = 4;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(497, 140);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(204, 20);
-            this.textBox2.TabIndex = 5;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(497, 222);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(204, 20);
-            this.textBox3.TabIndex = 6;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(497, 183);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(204, 20);
-            this.textBox4.TabIndex = 7;
-            // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(497, 387);
+            this.button4.Location = new System.Drawing.Point(799, 196);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(203, 26);
             this.button4.TabIndex = 8;
@@ -172,46 +135,9 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(494, 83);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Фамилия";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(494, 124);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Имя";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(494, 167);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Категория";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(494, 206);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Стаж";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(497, 256);
+            this.button5.Location = new System.Drawing.Point(799, 65);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(204, 33);
             this.button5.TabIndex = 13;
@@ -225,7 +151,7 @@
             this.таблицыToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(758, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1457, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -288,110 +214,11 @@
             this.госномерDataGridViewTextBoxColumn,
             this.датапроизводстваDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.автомобилиBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(55, 37);
+            this.dataGridView1.Location = new System.Drawing.Point(23, 37);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(411, 196);
+            this.dataGridView1.Size = new System.Drawing.Size(552, 196);
             this.dataGridView1.TabIndex = 15;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.кодвладельцаDataGridViewTextBoxColumn1,
-            this.имяDataGridViewTextBoxColumn,
-            this.фамилияDataGridViewTextBoxColumn,
-            this.отчествоDataGridViewTextBoxColumn,
-            this.категорияправDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.владельцыBindingSource;
-            this.dataGridView2.Location = new System.Drawing.Point(55, 83);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(411, 196);
-            this.dataGridView2.TabIndex = 16;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.AutoGenerateColumns = false;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.коднарушенияDataGridViewTextBoxColumn,
-            this.кодавтомобиляDataGridViewTextBoxColumn1,
-            this.кодинспектораDataGridViewTextBoxColumn,
-            this.кодвладельцаDataGridViewTextBoxColumn2,
-            this.кодвиданарушенияDataGridViewTextBoxColumn,
-            this.датанарушенияDataGridViewTextBoxColumn,
-            this.фиоводителяDataGridViewTextBoxColumn,
-            this.правоУправленияDataGridViewCheckBoxColumn});
-            this.dataGridView3.DataSource = this.фактынарушенияBindingSource;
-            this.dataGridView3.Location = new System.Drawing.Point(55, 140);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(408, 196);
-            this.dataGridView3.TabIndex = 17;
-            this.dataGridView3.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
-            // 
-            // dataGridView4
-            // 
-            this.dataGridView4.AutoGenerateColumns = false;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.кодинспектораDataGridViewTextBoxColumn1,
-            this.фиоинспектораDataGridViewTextBoxColumn});
-            this.dataGridView4.DataSource = this.инспекторBindingSource;
-            this.dataGridView4.Location = new System.Drawing.Point(55, 185);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(408, 196);
-            this.dataGridView4.TabIndex = 18;
-            this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
-            // 
-            // dataGridView5
-            // 
-            this.dataGridView5.AutoGenerateColumns = false;
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.кодвиданарушенияDataGridViewTextBoxColumn1,
-            this.наименованиевиданарушенияDataGridViewTextBoxColumn,
-            this.размерШтрафаDataGridViewTextBoxColumn});
-            this.dataGridView5.DataSource = this.видынарушенияBindingSource;
-            this.dataGridView5.Location = new System.Drawing.Point(52, 222);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(411, 196);
-            this.dataGridView5.TabIndex = 19;
-            this.dataGridView5.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellContentClick_1);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(571, 44);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "label5";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(642, 48);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(73, 26);
-            this.button6.TabIndex = 21;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // testDataSet
-            // 
-            this.testDataSet.DataSetName = "TestDataSet";
-            this.testDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // автомобилиBindingSource
-            // 
-            this.автомобилиBindingSource.DataMember = "автомобили";
-            this.автомобилиBindingSource.DataSource = this.testDataSet;
-            // 
-            // автомобилиTableAdapter
-            // 
-            this.автомобилиTableAdapter.ClearBeforeFill = true;
             // 
             // кодавтомобиляDataGridViewTextBoxColumn
             // 
@@ -423,14 +250,32 @@
             this.датапроизводстваDataGridViewTextBoxColumn.HeaderText = "дата_производства";
             this.датапроизводстваDataGridViewTextBoxColumn.Name = "датапроизводстваDataGridViewTextBoxColumn";
             // 
-            // владельцыBindingSource
+            // автомобилиBindingSource
             // 
-            this.владельцыBindingSource.DataMember = "владельцы";
-            this.владельцыBindingSource.DataSource = this.testDataSet;
+            this.автомобилиBindingSource.DataMember = "автомобили";
+            this.автомобилиBindingSource.DataSource = this.testDataSet;
             // 
-            // владельцыTableAdapter
+            // testDataSet
             // 
-            this.владельцыTableAdapter.ClearBeforeFill = true;
+            this.testDataSet.DataSetName = "TestDataSet";
+            this.testDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.кодвладельцаDataGridViewTextBoxColumn1,
+            this.имяDataGridViewTextBoxColumn,
+            this.фамилияDataGridViewTextBoxColumn,
+            this.отчествоDataGridViewTextBoxColumn,
+            this.категорияправDataGridViewTextBoxColumn});
+            this.dataGridView2.DataSource = this.владельцыBindingSource;
+            this.dataGridView2.Location = new System.Drawing.Point(23, 83);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(552, 196);
+            this.dataGridView2.TabIndex = 16;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // кодвладельцаDataGridViewTextBoxColumn1
             // 
@@ -462,14 +307,30 @@
             this.категорияправDataGridViewTextBoxColumn.HeaderText = "Категория_прав";
             this.категорияправDataGridViewTextBoxColumn.Name = "категорияправDataGridViewTextBoxColumn";
             // 
-            // фактынарушенияBindingSource
+            // владельцыBindingSource
             // 
-            this.фактынарушенияBindingSource.DataMember = "факты_нарушения";
-            this.фактынарушенияBindingSource.DataSource = this.testDataSet;
+            this.владельцыBindingSource.DataMember = "владельцы";
+            this.владельцыBindingSource.DataSource = this.testDataSet;
             // 
-            // факты_нарушенияTableAdapter
+            // dataGridView3
             // 
-            this.факты_нарушенияTableAdapter.ClearBeforeFill = true;
+            this.dataGridView3.AutoGenerateColumns = false;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.коднарушенияDataGridViewTextBoxColumn,
+            this.кодавтомобиляDataGridViewTextBoxColumn1,
+            this.кодинспектораDataGridViewTextBoxColumn,
+            this.кодвладельцаDataGridViewTextBoxColumn2,
+            this.кодвиданарушенияDataGridViewTextBoxColumn,
+            this.датанарушенияDataGridViewTextBoxColumn,
+            this.фиоводителяDataGridViewTextBoxColumn,
+            this.правоУправленияDataGridViewCheckBoxColumn});
+            this.dataGridView3.DataSource = this.фактынарушенияBindingSource;
+            this.dataGridView3.Location = new System.Drawing.Point(23, 140);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(552, 196);
+            this.dataGridView3.TabIndex = 17;
+            this.dataGridView3.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
             // 
             // коднарушенияDataGridViewTextBoxColumn
             // 
@@ -519,14 +380,24 @@
             this.правоУправленияDataGridViewCheckBoxColumn.HeaderText = "право управления";
             this.правоУправленияDataGridViewCheckBoxColumn.Name = "правоУправленияDataGridViewCheckBoxColumn";
             // 
-            // инспекторBindingSource
+            // фактынарушенияBindingSource
             // 
-            this.инспекторBindingSource.DataMember = "Инспектор";
-            this.инспекторBindingSource.DataSource = this.testDataSet;
+            this.фактынарушенияBindingSource.DataMember = "факты_нарушения";
+            this.фактынарушенияBindingSource.DataSource = this.testDataSet;
             // 
-            // инспекторTableAdapter
+            // dataGridView4
             // 
-            this.инспекторTableAdapter.ClearBeforeFill = true;
+            this.dataGridView4.AutoGenerateColumns = false;
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.кодинспектораDataGridViewTextBoxColumn1,
+            this.фиоинспектораDataGridViewTextBoxColumn});
+            this.dataGridView4.DataSource = this.инспекторBindingSource;
+            this.dataGridView4.Location = new System.Drawing.Point(23, 185);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(552, 196);
+            this.dataGridView4.TabIndex = 18;
+            this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
             // 
             // кодинспектораDataGridViewTextBoxColumn1
             // 
@@ -540,14 +411,25 @@
             this.фиоинспектораDataGridViewTextBoxColumn.HeaderText = "фио_инспектора";
             this.фиоинспектораDataGridViewTextBoxColumn.Name = "фиоинспектораDataGridViewTextBoxColumn";
             // 
-            // видынарушенияBindingSource
+            // инспекторBindingSource
             // 
-            this.видынарушенияBindingSource.DataMember = "виды_нарушения";
-            this.видынарушенияBindingSource.DataSource = this.testDataSet;
+            this.инспекторBindingSource.DataMember = "Инспектор";
+            this.инспекторBindingSource.DataSource = this.testDataSet;
             // 
-            // виды_нарушенияTableAdapter
+            // dataGridView5
             // 
-            this.виды_нарушенияTableAdapter.ClearBeforeFill = true;
+            this.dataGridView5.AutoGenerateColumns = false;
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.кодвиданарушенияDataGridViewTextBoxColumn1,
+            this.наименованиевиданарушенияDataGridViewTextBoxColumn,
+            this.размерШтрафаDataGridViewTextBoxColumn});
+            this.dataGridView5.DataSource = this.видынарушенияBindingSource;
+            this.dataGridView5.Location = new System.Drawing.Point(23, 222);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.Size = new System.Drawing.Size(552, 196);
+            this.dataGridView5.TabIndex = 19;
+            this.dataGridView5.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellContentClick_1);
             // 
             // кодвиданарушенияDataGridViewTextBoxColumn1
             // 
@@ -567,28 +449,54 @@
             this.размерШтрафаDataGridViewTextBoxColumn.HeaderText = "размер штрафа";
             this.размерШтрафаDataGridViewTextBoxColumn.Name = "размерШтрафаDataGridViewTextBoxColumn";
             // 
+            // видынарушенияBindingSource
+            // 
+            this.видынарушенияBindingSource.DataMember = "виды_нарушения";
+            this.видынарушенияBindingSource.DataSource = this.testDataSet;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(799, 27);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(203, 26);
+            this.button6.TabIndex = 21;
+            this.button6.Text = "Добавить владельца";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // автомобилиTableAdapter
+            // 
+            this.автомобилиTableAdapter.ClearBeforeFill = true;
+            // 
+            // владельцыTableAdapter
+            // 
+            this.владельцыTableAdapter.ClearBeforeFill = true;
+            // 
+            // факты_нарушенияTableAdapter
+            // 
+            this.факты_нарушенияTableAdapter.ClearBeforeFill = true;
+            // 
+            // инспекторTableAdapter
+            // 
+            this.инспекторTableAdapter.ClearBeforeFill = true;
+            // 
+            // виды_нарушенияTableAdapter
+            // 
+            this.виды_нарушенияTableAdapter.ClearBeforeFill = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 455);
+            this.ClientSize = new System.Drawing.Size(1457, 455);
             this.Controls.Add(this.button6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.dataGridView5);
             this.Controls.Add(this.dataGridView4);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -600,15 +508,15 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.testDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.автомобилиBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.testDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.владельцыBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.фактынарушенияBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.инспекторBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.видынарушенияBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -619,15 +527,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem таблицыToolStripMenuItem;
@@ -641,7 +541,6 @@
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.DataGridView dataGridView5;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button6;
         private TestDataSet testDataSet;
         private System.Windows.Forms.BindingSource автомобилиBindingSource;

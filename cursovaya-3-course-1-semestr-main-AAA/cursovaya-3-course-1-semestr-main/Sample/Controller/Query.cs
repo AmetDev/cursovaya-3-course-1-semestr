@@ -99,17 +99,28 @@ namespace Sample.Controller
             command.ExecuteNonQuery();
             connection.Close();
         }
-        public void AddOwner(string FirstName, string LastName, string Category)
+        public void AddOwner(string FirstName, string LastName, string FatherName, string Category)
         {
             connection.Open();
-            command = new OleDbCommand($"INSERT INTO владельцы(Имя, Фамилия, Категория_прав) VALUES(@FirstName, @LastName, @Category)", connection);
+            command = new OleDbCommand($"INSERT INTO владельцы(Имя, Фамилия, Отчество, Категория_прав) VALUES(@FirstName, @LastName, @FatherName, @Category)", connection);
             command.Parameters.AddWithValue("FirstName", FirstName);
             command.Parameters.AddWithValue("LastName", LastName);
+            command.Parameters.AddWithValue("FatherName", FatherName);
             command.Parameters.AddWithValue("Category", Category);
             command.ExecuteNonQuery();
             connection.Close();
         }
-
+        public void AddCars(int code_vladelech, string model, string gover_number, string data_proizvod)
+        {
+            connection.Open();
+            command = new OleDbCommand($"INSERT INTO автомобили(код_владельца, модель, гос_номер, дата_производства) VALUES (@code_vladelech, @model, @gover_number, @data_proizvod)", connection);
+            command.Parameters.AddWithValue("code_vladelech", code_vladelech);
+            command.Parameters.AddWithValue("model", model);
+            command.Parameters.AddWithValue("gover_number", gover_number);
+            command.Parameters.AddWithValue("data_proizvod", "05.06.2022");
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
         public void Delete(int ID)
         {
             connection.Open();
