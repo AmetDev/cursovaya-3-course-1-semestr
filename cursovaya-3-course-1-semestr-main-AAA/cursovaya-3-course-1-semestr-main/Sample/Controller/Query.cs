@@ -121,6 +121,29 @@ namespace Sample.Controller
             command.ExecuteNonQuery();
             connection.Close();
         }
+        /*public DataTable GetIDOwnder(string firstName, string LastName, string FatherName) {
+
+            connection.Open();
+            dataAdapter = new OleDbDataAdapter($"SELECT код_владельца From владельцы WHERE Имя = {firstName} AND Фамилия={LastName} AND Отчество={FatherName}", connection);
+            bufferTable.Clear();
+            dataAdapter.Fill(bufferTable);
+            connection.Close();
+            return bufferTable;
+        }*/
+        public DataTable GetIDOwnder(string firstName, string LastName, string FatherName)
+        {
+            connection.Open();
+
+            // Enclose string values in single quotes
+            dataAdapter = new OleDbDataAdapter($"SELECT код_владельца FROM владельцы WHERE Имя = '{firstName}' AND Фамилия = '{LastName}' AND Отчество = '{FatherName}'", connection);
+
+            bufferTable.Clear();
+            dataAdapter.Fill(bufferTable);
+
+            connection.Close();
+            return bufferTable;
+        }
+
         public void Delete(int ID)
         {
             connection.Open();

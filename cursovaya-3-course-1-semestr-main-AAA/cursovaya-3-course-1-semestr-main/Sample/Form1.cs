@@ -25,7 +25,7 @@ namespace Sample
         public string TableNameGlobal { get; set; }
         bool isAdmin = true;
         CheckAdmin Checks;
-        bool[] arrBoolStateManager  = new bool[5] {false, false, false, false, false};
+        bool[] arrBoolStateManager = new bool[5] { false, false, false, false, false };
         public bool Value { get; set; }
         public int IndexDate { get; set; }
 
@@ -51,13 +51,13 @@ namespace Sample
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
-           // controller.Add(textBox1.Text, textBox2.Text, textBox4.Text,  int.Parse(textBox3.Text), isAdmin);
+
+            // controller.Add(textBox1.Text, textBox2.Text, textBox4.Text,  int.Parse(textBox3.Text), isAdmin);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace Sample
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Application.Exit(); 
+            Application.Exit();
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -79,12 +79,12 @@ namespace Sample
         {
 
         }
-       
+
 
 
         private void button5_Click(object sender, EventArgs e)
         {
-          
+
             Form3 ss = new Form3();
             this.Hide();
             ss.Show();
@@ -108,28 +108,99 @@ namespace Sample
             // TODO: данная строка кода позволяет загрузить данные в таблицу "testDataSet.автомобили". При необходимости она может быть перемещена или удалена.
             this.автомобилиTableAdapter.Fill(this.testDataSet.автомобили);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "testDataSet3.виды_нарушения". При необходимости она может быть перемещена или удалена.
-    
+
         }
         List<Label> labels = new List<Label>();
         List<TextBox> textBoxLabel = new List<TextBox>();
         List<Button> buttonsList = new List<Button>();
         List<string> labelsString = new List<string>();
         List<int> DateIndex = new List<int>();
+        //this is needed for later use
+        List<ComboBox> comboBoxes = new List<ComboBox>();
+        bool isClickBtnDate = false;
+        MonthCalendar dynamicMonthCalendar = new MonthCalendar();
+        // НАДО БУДЕТ ВЫНЕСТИ ГЛОБАЛЬНО
         private void DynamicMonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
             int IndexDate1 = IndexDate - 1;
-
-
             for (int i = 0; i < textBoxLabel.Count; i++)
             {
-                if (i== IndexDate1)
+                if (i == IndexDate1)
                 {
+                    // Add the MonthCalendar control to the form's Controls collection
                     textBoxLabel[IndexDate1].Text = e.Start.ToShortDateString().ToString();
                     MessageBox.Show($"Selected Date: {e.Start.ToShortDateString()}");
+                    this.Controls.Remove(dynamicMonthCalendar);
+                    
                 }
             }
-         
+
         }
+        void textBox_Enter(object sender, EventArgs e)
+        {
+            // Get the TextBox that received focus
+            Button btn = sender as Button;
+            MessageBox.Show(btn.Name + " Clicked"); // Display TextBox details
+
+            this.Controls.Add(dynamicMonthCalendar);
+            
+            dynamicMonthCalendar.DateSelected += new DateRangeEventHandler(this.DynamicMonthCalendar_DateSelected);
+           
+
+
+        }
+
+
+        private void Clciked(object sender, EventArgs e)
+        {
+            TextBox pressedTextBox = (TextBox)sender;
+            foreach (var item in textBoxLabel)
+            {
+                if (item is TextBox textBox) // Check if the item is a TextBox
+                {
+                    textBox.Click += new EventHandler(this.textBox_Enter);
+                }
+            }
+        }
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if (comboBox != null)
+            {
+                string selectedValue = comboBox.SelectedItem.ToString();
+                // Perform action based on the selected value
+                string[] parts = selectedValue.Split(' ');
+                if (parts.Length == 3)
+                {
+                    string lastName = parts[0];    // Фамилия
+                    string firstName = parts[1];   // Имя
+                    string middleName = parts[2];  // Отчество
+                    MessageBox.Show($"Selected lastName: {lastName}");
+                    MessageBox.Show($"Selected firstName: {firstName}");
+                    MessageBox.Show($"Selected middleName: {middleName}");
+                    var dataID = controller.GetIDOwnder(firstName, middleName, lastName);
+                    foreach (DataRow row in dataID.Rows)
+                    {
+                        MessageBox.Show(row.ToString() );  
+                       /* // Iterate through columns
+                        for (int k = 0; k < dataID.Columns.Count; k++)
+                        {
+                            // Display the column name and its corresponding value
+                            MessageBox.Show($"{dataID.Columns[k].ColumnName}: {row[k]}");
+                        }*/
+                    }
+                    /*  var dataID = controller.GetIDOwnder(firstName, middleName, lastName);
+                      for (int k = 0; k <  dataID.Columns.Count; k++)
+                      {
+                          MessageBox.Show(dataID.Columns[k].ToString());
+                      }
+  */
+                }
+            }
+        }
+
+
+
         private void автомобилиToolStripMenuItem_Click(object sender, EventArgs e)
         {
           
@@ -153,37 +224,66 @@ namespace Sample
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
 
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select * From автомобили", con);
+            OleDbDataAdapter DateOwner = new OleDbDataAdapter("Select Фамилия, Имя, Отчество From владельцы", con);
             DataTable dataTable = new DataTable();
             dataAdapter.Fill(dataTable);
             int k = 0;
             TableNameGlobal = "автомобили";
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
-               
-
-                if (i==0) continue;  
-                DataColumn column = dataTable.Columns[i];
-                Type columnType = column.DataType;
-
                 k += 45;
                 Label myLabel = new Label();
                 TextBox newTextBox = new TextBox();
+
+
+                if (i==0) continue;  
+               
+                DataColumn column = dataTable.Columns[i];
+                Type columnType = column.DataType;
+                if (i == 1)
+                {
+                    //this is needed for later use
+                    ComboBox comboBox = new ComboBox();
+                    comboBox.Name = "comboBox_" + column.ColumnName; // Assign a unique name
+                    comboBox.Location = new Point(650, 170 + k);
+                    comboBox.DropDownStyle = ComboBoxStyle.DropDownList; // Set the style
+                    comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged; // Handle selection change event
+
+                    // Populate ComboBox with values from владельцы table
+                    DataTable ownersTable = new DataTable();
+                    DateOwner.Fill(ownersTable);
+                    foreach (DataRow row in ownersTable.Rows)
+                    {
+                        string fullName = $"{row["Фамилия"]} {row["Имя"]} {row["Отчество"]}";
+                        comboBox.Items.Add(fullName);
+                    }
+
+                    this.Controls.Add(comboBox);
+                    comboBoxes.Add(comboBox);
+                   
+
+
+                }
+               
+               
                 if (columnType == typeof(DateTime))
                 {
                     IndexDate = i;
                     // Do something specific for DateTime data type
-                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
-                    MonthCalendar dynamicMonthCalendar = new MonthCalendar();
-                    // НАДО БУДЕТ ВЫНЕСТИ ГЛОБАЛЬНО
+                   // MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                   
                     // Set the location and size of the MonthCalendar
                     dynamicMonthCalendar.Location = new System.Drawing.Point(750, 170 + k);
                     dynamicMonthCalendar.Size = new System.Drawing.Size(200, 180);
+                    Button button = new Button();
+                    button.Name = "date";
+                    button.Text = "выберите дату";
+                    button.Size = new System.Drawing.Size(100, 25);
+                    button.Location = new System.Drawing.Point(750, 167 + k);
+                    button.Click += new EventHandler(this.textBox_Enter);
+                    this.Controls.Add(button);
+                    //dynamicMonthCalendar.DateSelected += DynamicMonthCalendar_DateSelected;
 
-                    
-                    dynamicMonthCalendar.DateSelected += DynamicMonthCalendar_DateSelected;
-
-                    // Add the MonthCalendar control to the form's Controls collection
-                    this.Controls.Add(dynamicMonthCalendar);
                 }
                 newTextBox.Name = "textBox " + column;
                 newTextBox.Location = new Point(650, 170 + k);
@@ -196,6 +296,11 @@ namespace Sample
                 this.Controls.Add(newTextBox);
                 labels.Add(myLabel);
                 textBoxLabel.Add(newTextBox);
+                if(i==1)
+                {
+                    
+                    this.Controls.Remove(newTextBox);
+                }
             }
             /* foreach (DataColumn column in dataTable.Columns)
              {
@@ -440,6 +545,7 @@ namespace Sample
      
             }
             AddInDB(labelsString);
+            labelsString.Clear();
 
 
 
