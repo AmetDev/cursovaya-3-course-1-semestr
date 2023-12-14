@@ -117,7 +117,7 @@ namespace Sample.Controller
             command.Parameters.AddWithValue("code_vladelech", code_vladelech);
             command.Parameters.AddWithValue("model", model);
             command.Parameters.AddWithValue("gover_number", gover_number);
-            command.Parameters.AddWithValue("data_proizvod", "05.06.2022");
+            command.Parameters.AddWithValue("data_proizvod", data_proizvod);
             command.ExecuteNonQuery();
             connection.Close();
         }

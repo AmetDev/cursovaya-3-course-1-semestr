@@ -27,6 +27,7 @@ namespace Sample
         CheckAdmin Checks;
         bool[] arrBoolStateManager  = new bool[5] {false, false, false, false, false};
         public bool Value { get; set; }
+        public int IndexDate { get; set; }
 
         public Form1(bool isCheck)
         {
@@ -113,10 +114,42 @@ namespace Sample
         List<TextBox> textBoxLabel = new List<TextBox>();
         List<Button> buttonsList = new List<Button>();
         List<string> labelsString = new List<string>();
+        List<int> DateIndex = new List<int>();
+        private void DynamicMonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            int IndexDate1 = IndexDate - 1;
 
 
+            for (int i = 0; i < textBoxLabel.Count; i++)
+            {
+                if (i== IndexDate1)
+                {
+                    textBoxLabel[IndexDate1].Text = e.Start.ToShortDateString().ToString();
+                    MessageBox.Show($"Selected Date: {e.Start.ToShortDateString()}");
+                }
+            }
+         
+        }
         private void автомобилиToolStripMenuItem_Click(object sender, EventArgs e)
         {
+          
+            for (int i = 0; i < labels.Count; i++)
+            {
+               
+                this.Controls.Remove(labels[i]);
+                
+            }
+            for (int i = 0; i < textBoxLabel.Count; i++)
+            {
+
+                this.Controls.Remove(textBoxLabel[i]);
+
+            }
+
+
+            textBoxLabel.Clear();
+            labelsString.Clear();
+
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
 
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select * From автомобили", con);
@@ -124,14 +157,34 @@ namespace Sample
             dataAdapter.Fill(dataTable);
             int k = 0;
             TableNameGlobal = "автомобили";
-
-            foreach (DataColumn column in dataTable.Columns)
+            for (int i = 0; i < dataTable.Columns.Count; i++)
             {
+               
+
+                if (i==0) continue;  
+                DataColumn column = dataTable.Columns[i];
+                Type columnType = column.DataType;
 
                 k += 45;
                 Label myLabel = new Label();
                 TextBox newTextBox = new TextBox();
+                if (columnType == typeof(DateTime))
+                {
+                    IndexDate = i;
+                    // Do something specific for DateTime data type
+                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                    MonthCalendar dynamicMonthCalendar = new MonthCalendar();
+                    // НАДО БУДЕТ ВЫНЕСТИ ГЛОБАЛЬНО
+                    // Set the location and size of the MonthCalendar
+                    dynamicMonthCalendar.Location = new System.Drawing.Point(750, 170 + k);
+                    dynamicMonthCalendar.Size = new System.Drawing.Size(200, 180);
 
+                    
+                    dynamicMonthCalendar.DateSelected += DynamicMonthCalendar_DateSelected;
+
+                    // Add the MonthCalendar control to the form's Controls collection
+                    this.Controls.Add(dynamicMonthCalendar);
+                }
                 newTextBox.Name = "textBox " + column;
                 newTextBox.Location = new Point(650, 170 + k);
                 myLabel.Parent = this.Parent;
@@ -141,19 +194,39 @@ namespace Sample
                 myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
                 this.Controls.Add(myLabel);
                 this.Controls.Add(newTextBox);
-
+                labels.Add(myLabel);
                 textBoxLabel.Add(newTextBox);
-
-
             }
-            foreach (var item in buttonsList) //обходим все элементы формы
-            {
-                if (item is Button) // проверяем, что это кнопка
-                {
-                    ((Button)item).Click += CommonBtn_Click; //приводим к типу и устанавливаем обработчик события  
-                }
-            }
+            /* foreach (DataColumn column in dataTable.Columns)
+             {
 
+                 k += 45;
+                 Label myLabel = new Label();
+                 TextBox newTextBox = new TextBox();
+
+                 newTextBox.Name = "textBox " + column;
+                 newTextBox.Location = new Point(650, 170 + k);
+                 myLabel.Parent = this.Parent;
+                 myLabel.Text = column.ToString();
+                 myLabel.Location = new Point(650, 160 + k);
+                 myLabel.Name = "lbl" + column;
+                 myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
+                 this.Controls.Add(myLabel);
+                 this.Controls.Add(newTextBox);
+                 labels.Add(myLabel);
+                 textBoxLabel.Add(newTextBox);
+
+
+             }*/
+
+            /*  foreach (var item in buttonsList) //обходим все элементы формы
+              {
+                  if (item is Button) // проверяем, что это кнопка
+                  {
+                      ((Button)item).Click += CommonBtn_Click; //приводим к типу и устанавливаем обработчик события  
+                  }
+              }
+  */
 
 
 
@@ -184,18 +257,18 @@ namespace Sample
             {
                 case "владельцы":
          
-                    string FirstName=argsLablesString[1];
-                    string LastName = argsLablesString[2];
-                    string FatherName = argsLablesString[3];
-                    string Category = argsLablesString[4];
+                    string FirstName=argsLablesString[0];
+                    string LastName = argsLablesString[1];
+                    string FatherName = argsLablesString[2];
+                    string Category = argsLablesString[3];
                     controller.AddOwner(FirstName, LastName, FatherName, Category);
                      dataGridView2.DataSource = controller.UpdatePerson();
                     break;
                 case "автомобили":
-                    int code_vladelech = Convert.ToInt32(argsLablesString[1]);
-                    string model = argsLablesString[2];
-                    string gover_number = argsLablesString[3];
-                    string data_proizvod = argsLablesString[4];
+                    int code_vladelech = Convert.ToInt32(argsLablesString[0]);
+                    string model = argsLablesString[1];
+                    string gover_number = argsLablesString[2];
+                    string data_proizvod = argsLablesString[3];
                     controller.AddCars(code_vladelech, model, gover_number, data_proizvod);
                     dataGridView1.DataSource = controller.UpdateCars();
                     break;
@@ -203,7 +276,24 @@ namespace Sample
         }
         private void владельцыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            for (int i = 0; i < labels.Count; i++)
+            {
+
+                this.Controls.Remove(labels[i]);
+
+            }
+            for (int i = 0; i < textBoxLabel.Count; i++)
+            {
+
+                this.Controls.Remove(textBoxLabel[i]);
+
+            }
+
+
+            textBoxLabel.Clear();
+            labelsString.Clear();
+
+
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
            
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select * From владельцы", con);
@@ -211,8 +301,33 @@ namespace Sample
             dataAdapter.Fill(dataTable);
             int k=0;
             TableNameGlobal = "владельцы";
-         
-            foreach (DataColumn column in dataTable.Columns)
+
+            for (int i = 0; i < dataTable.Columns.Count; i++)
+            {
+                if (i == 0) continue;
+                DataColumn column = dataTable.Columns[i];
+                Type columnType = column.DataType;
+                k += 45;
+                Label myLabel = new Label();
+                TextBox newTextBox = new TextBox();
+                if (columnType == typeof(DateTime))
+                {
+                    // Do something specific for DateTime data type
+                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                }
+                newTextBox.Name = "textBox " + column;
+                newTextBox.Location = new Point(650, 170 + k);
+                myLabel.Parent = this.Parent;
+                myLabel.Text = column.ToString();
+                myLabel.Location = new Point(650, 160 + k);
+                myLabel.Name = "lbl" + column;
+                myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
+                this.Controls.Add(myLabel);
+                this.Controls.Add(newTextBox);
+                labels.Add(myLabel);
+                textBoxLabel.Add(newTextBox);
+            }
+           /* foreach (DataColumn column in dataTable.Columns)
             {
                 
                 k += 45;
@@ -228,18 +343,18 @@ namespace Sample
                 myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
                 this.Controls.Add(myLabel);
                 this.Controls.Add(newTextBox);
-             
+                labels.Add(myLabel);
                 textBoxLabel.Add(newTextBox);
                
 
-            }
-                foreach (var item in buttonsList) //обходим все элементы формы
+            }*/
+               /* foreach (var item in buttonsList) //обходим все элементы формы
                 {
                     if (item is Button) // проверяем, что это кнопка
                     {
                         ((Button)item).Click += CommonBtn_Click; //приводим к типу и устанавливаем обработчик события  
                     }
-                }
+                }*/
             
 
 
@@ -325,7 +440,8 @@ namespace Sample
      
             }
             AddInDB(labelsString);
-         
+
+
 
         }
 
