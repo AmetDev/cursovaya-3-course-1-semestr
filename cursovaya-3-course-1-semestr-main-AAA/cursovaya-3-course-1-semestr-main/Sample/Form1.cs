@@ -28,7 +28,7 @@ namespace Sample
         bool[] arrBoolStateManager = new bool[5] { false, false, false, false, false };
         public bool Value { get; set; }
         public int IndexDate { get; set; }
-
+        public int IndexCodeOwner { get; set; }
         public Form1(bool isCheck)
         {
             InitializeComponent();
@@ -57,7 +57,7 @@ namespace Sample
         private void button2_Click(object sender, EventArgs e)
         {
 
-            // controller.Add(textBox1.Text, textBox2.Text, textBox4.Text,  int.Parse(textBox3.Text), isAdmin);
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -119,15 +119,17 @@ namespace Sample
         List<ComboBox> comboBoxes = new List<ComboBox>();
         bool isClickBtnDate = false;
         MonthCalendar dynamicMonthCalendar = new MonthCalendar();
+        Button btnDate = new Button();
         // НАДО БУДЕТ ВЫНЕСТИ ГЛОБАЛЬНО
         private void DynamicMonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
             int IndexDate1 = IndexDate - 1;
             for (int i = 0; i < textBoxLabel.Count; i++)
             {
+               
                 if (i == IndexDate1)
                 {
-                    // Add the MonthCalendar control to the form's Controls collection
+                  
                     textBoxLabel[IndexDate1].Text = e.Start.ToShortDateString().ToString();
                     MessageBox.Show($"Selected Date: {e.Start.ToShortDateString()}");
                     this.Controls.Remove(dynamicMonthCalendar);
@@ -168,33 +170,30 @@ namespace Sample
             if (comboBox != null)
             {
                 string selectedValue = comboBox.SelectedItem.ToString();
-                // Perform action based on the selected value
+
                 string[] parts = selectedValue.Split(' ');
                 if (parts.Length == 3)
                 {
                     string lastName = parts[0];    // Фамилия
                     string firstName = parts[1];   // Имя
                     string middleName = parts[2];  // Отчество
-                    MessageBox.Show($"Selected lastName: {lastName}");
-                    MessageBox.Show($"Selected firstName: {firstName}");
-                    MessageBox.Show($"Selected middleName: {middleName}");
-                    var dataID = controller.GetIDOwnder(firstName, middleName, lastName);
-                    foreach (DataRow row in dataID.Rows)
+                   
+                    var dataID = controller.GetIDOwnder(firstName, lastName, middleName);
+                  
+                    if (dataID.Rows.Count > 0)
                     {
-                        MessageBox.Show(row.ToString() );  
-                       /* // Iterate through columns
-                        for (int k = 0; k < dataID.Columns.Count; k++)
+                        foreach (DataRow row in dataID.Rows)
                         {
-                            // Display the column name and its corresponding value
-                            MessageBox.Show($"{dataID.Columns[k].ColumnName}: {row[k]}");
-                        }*/
+                            MessageBox.Show(row["код_владельца"].ToString());
+                            textBoxLabel[0].Tag = "DynamicallyGenerated";
+                            textBoxLabel[0].Text = row["код_владельца"].ToString();
+                        }
                     }
-                    /*  var dataID = controller.GetIDOwnder(firstName, middleName, lastName);
-                      for (int k = 0; k <  dataID.Columns.Count; k++)
-                      {
-                          MessageBox.Show(dataID.Columns[k].ToString());
-                      }
-  */
+                    else
+                    {
+                        MessageBox.Show("No data found.");
+                    }
+
                 }
             }
         }
@@ -203,12 +202,11 @@ namespace Sample
 
         private void автомобилиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
             for (int i = 0; i < labels.Count; i++)
             {
-               
+
                 this.Controls.Remove(labels[i]);
-                
+
             }
             for (int i = 0; i < textBoxLabel.Count; i++)
             {
@@ -216,10 +214,15 @@ namespace Sample
                 this.Controls.Remove(textBoxLabel[i]);
 
             }
-
-
+            for (int i = 0; i < comboBoxes.Count; i++)
+            {
+                this.Controls.Remove(comboBoxes[i]);
+            }
+            this.Controls.Remove(btnDate);
             textBoxLabel.Clear();
             labelsString.Clear();
+            this.Controls.Remove(dynamicMonthCalendar);
+
 
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
 
@@ -234,7 +237,8 @@ namespace Sample
                 k += 45;
                 Label myLabel = new Label();
                 TextBox newTextBox = new TextBox();
-
+                myLabel.Tag  = "DynamicallyGenerated";
+                newTextBox.Tag = "DynamicallyGenerated";
 
                 if (i==0) continue;  
                
@@ -242,10 +246,12 @@ namespace Sample
                 Type columnType = column.DataType;
                 if (i == 1)
                 {
+                    IndexCodeOwner = i;
                     //this is needed for later use
                     ComboBox comboBox = new ComboBox();
                     comboBox.Name = "comboBox_" + column.ColumnName; // Assign a unique name
-                    comboBox.Location = new Point(650, 170 + k);
+                    comboBox.Location = new Point(600, -50 + k);
+                    comboBox.Tag = "DynamicallyGenerated";
                     comboBox.DropDownStyle = ComboBoxStyle.DropDownList; // Set the style
                     comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged; // Handle selection change event
 
@@ -269,27 +275,26 @@ namespace Sample
                 if (columnType == typeof(DateTime))
                 {
                     IndexDate = i;
-                    // Do something specific for DateTime data type
-                   // MessageBox.Show(columnType.ToString());// Set default value or any specific property
                    
-                    // Set the location and size of the MonthCalendar
-                    dynamicMonthCalendar.Location = new System.Drawing.Point(750, 170 + k);
+                    dynamicMonthCalendar.Location = new System.Drawing.Point(750, 60 + k);
                     dynamicMonthCalendar.Size = new System.Drawing.Size(200, 180);
-                    Button button = new Button();
-                    button.Name = "date";
-                    button.Text = "выберите дату";
-                    button.Size = new System.Drawing.Size(100, 25);
-                    button.Location = new System.Drawing.Point(750, 167 + k);
-                    button.Click += new EventHandler(this.textBox_Enter);
-                    this.Controls.Add(button);
-                    //dynamicMonthCalendar.DateSelected += DynamicMonthCalendar_DateSelected;
+                    btnDate.Name = "date";
+                    btnDate.Text = "выберите дату";
+                    btnDate.Tag = "DynamicallyGenerated";
+                    btnDate.Size = new System.Drawing.Size(100, 25);
+                    btnDate.Location = new System.Drawing.Point(700, -51 + k);
+                    btnDate.Click += new EventHandler(this.textBox_Enter);
+                    this.Controls.Add(btnDate);
+                   
 
                 }
                 newTextBox.Name = "textBox " + column;
-                newTextBox.Location = new Point(650, 170 + k);
+                newTextBox.Location = new Point(600, -50 + k);
+                newTextBox.Tag = "DynamicallyGenerated"; 
                 myLabel.Parent = this.Parent;
+                myLabel.Tag = "DynamicallyGenerated";
                 myLabel.Text = column.ToString();
-                myLabel.Location = new Point(650, 160 + k);
+                myLabel.Location = new Point(600, -63 + k);
                 myLabel.Name = "lbl" + column;
                 myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
                 this.Controls.Add(myLabel);
@@ -302,36 +307,6 @@ namespace Sample
                     this.Controls.Remove(newTextBox);
                 }
             }
-            /* foreach (DataColumn column in dataTable.Columns)
-             {
-
-                 k += 45;
-                 Label myLabel = new Label();
-                 TextBox newTextBox = new TextBox();
-
-                 newTextBox.Name = "textBox " + column;
-                 newTextBox.Location = new Point(650, 170 + k);
-                 myLabel.Parent = this.Parent;
-                 myLabel.Text = column.ToString();
-                 myLabel.Location = new Point(650, 160 + k);
-                 myLabel.Name = "lbl" + column;
-                 myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
-                 this.Controls.Add(myLabel);
-                 this.Controls.Add(newTextBox);
-                 labels.Add(myLabel);
-                 textBoxLabel.Add(newTextBox);
-
-
-             }*/
-
-            /*  foreach (var item in buttonsList) //обходим все элементы формы
-              {
-                  if (item is Button) // проверяем, что это кнопка
-                  {
-                      ((Button)item).Click += CommonBtn_Click; //приводим к типу и устанавливаем обработчик события  
-                  }
-              }
-  */
 
 
 
@@ -349,7 +324,9 @@ namespace Sample
           
             foreach (var item in textBoxLabel)
             {
+                item.Tag = "DynamicallyGenerated";
                 labelsString.Add(item.Text);
+
               
             }
             
@@ -393,10 +370,26 @@ namespace Sample
                 this.Controls.Remove(textBoxLabel[i]);
 
             }
-
-
+            for (int i = 0; i < comboBoxes.Count; i++)
+            {
+                this.Controls.Remove(comboBoxes[i]);
+            }
+            this.Controls.Remove(btnDate);
             textBoxLabel.Clear();
             labelsString.Clear();
+            this.Controls.Remove(dynamicMonthCalendar);
+            /*      
+                   foreach (Control control in this.Controls)
+                   {
+                       // Check if the control was dynamically generated
+                       if (control.Tag != null && control.Tag.ToString() == "DynamicallyGenerated")
+                       {
+                           MessageBox.Show(control.ToString());
+                           this.Controls.Remove(control);
+                           control.Dispose(); // Dispose to release resources
+                       }
+                   }*/
+
 
 
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
@@ -421,10 +414,10 @@ namespace Sample
                     MessageBox.Show(columnType.ToString());// Set default value or any specific property
                 }
                 newTextBox.Name = "textBox " + column;
-                newTextBox.Location = new Point(650, 170 + k);
+                newTextBox.Location = new Point(600, -5 + k);
                 myLabel.Parent = this.Parent;
                 myLabel.Text = column.ToString();
-                myLabel.Location = new Point(650, 160 + k);
+                myLabel.Location = new Point(600, -19 + k);
                 myLabel.Name = "lbl" + column;
                 myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
                 this.Controls.Add(myLabel);
@@ -432,37 +425,6 @@ namespace Sample
                 labels.Add(myLabel);
                 textBoxLabel.Add(newTextBox);
             }
-           /* foreach (DataColumn column in dataTable.Columns)
-            {
-                
-                k += 45;
-                Label myLabel = new Label();
-                TextBox newTextBox = new TextBox();
-              
-                newTextBox.Name = "textBox "+column;
-                newTextBox.Location = new Point(650, 170+k);
-                myLabel.Parent = this.Parent;
-                myLabel.Text = column.ToString();
-                myLabel.Location = new Point(650, 160+k);
-                myLabel.Name = "lbl" + column;
-                myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
-                this.Controls.Add(myLabel);
-                this.Controls.Add(newTextBox);
-                labels.Add(myLabel);
-                textBoxLabel.Add(newTextBox);
-               
-
-            }*/
-               /* foreach (var item in buttonsList) //обходим все элементы формы
-                {
-                    if (item is Button) // проверяем, что это кнопка
-                    {
-                        ((Button)item).Click += CommonBtn_Click; //приводим к типу и устанавливаем обработчик события  
-                    }
-                }*/
-            
-
-
 
 
             dataGridView1.Visible = false;

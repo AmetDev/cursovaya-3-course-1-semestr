@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Sample.Controller
 {
@@ -136,7 +137,6 @@ namespace Sample.Controller
 
             // Enclose string values in single quotes
             dataAdapter = new OleDbDataAdapter($"SELECT код_владельца FROM владельцы WHERE Имя = '{firstName}' AND Фамилия = '{LastName}' AND Отчество = '{FatherName}'", connection);
-
             bufferTable.Clear();
             dataAdapter.Fill(bufferTable);
 
