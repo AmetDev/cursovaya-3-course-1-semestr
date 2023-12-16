@@ -11,10 +11,10 @@ namespace Sample.Controller
 {
     class Query
     {
-        OleDbConnection     connection;
-        OleDbCommand        command;
-        OleDbDataAdapter    dataAdapter;
-        DataTable           bufferTable;
+        OleDbConnection connection;
+        OleDbCommand command;
+        OleDbDataAdapter dataAdapter;
+        DataTable bufferTable;
 
         public Query(string Conn)
         {
@@ -80,8 +80,8 @@ namespace Sample.Controller
         public void AddUsers(string Log, string Pas)
         {
             connection.Open();
-            command= new OleDbCommand($"INSERT INTO Users(Log, Pas) VALUES(@Log, @Pas)", connection);
-            command.Parameters.AddWithValue("Log",Log);
+            command = new OleDbCommand($"INSERT INTO Users(Log, Pas) VALUES(@Log, @Pas)", connection);
+            command.Parameters.AddWithValue("Log", Log);
             command.Parameters.AddWithValue("Pas", Pas);
             command.ExecuteNonQuery();
             connection.Close();
@@ -131,6 +131,15 @@ namespace Sample.Controller
             connection.Close();
             return bufferTable;
         }*/
+        public void AddVid_Narush(string name, int price)
+        {
+            connection.Open();
+            command = new OleDbCommand($"INSERT INTO виды_нарушения (наименование_вида_нарушения, [размер штрафа]) VALUES (@name, @price)", connection);
+            command.Parameters.AddWithValue("name", name);
+            command.Parameters.AddWithValue("price", price);
+
+        }
+
         public DataTable GetIDOwnder(string firstName, string LastName, string FatherName)
         {
             connection.Open();

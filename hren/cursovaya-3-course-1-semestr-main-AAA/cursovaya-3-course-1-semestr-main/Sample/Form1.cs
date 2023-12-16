@@ -378,18 +378,7 @@ namespace Sample
             textBoxLabel.Clear();
             labelsString.Clear();
             this.Controls.Remove(dynamicMonthCalendar);
-            /*      
-                   foreach (Control control in this.Controls)
-                   {
-                       // Check if the control was dynamically generated
-                       if (control.Tag != null && control.Tag.ToString() == "DynamicallyGenerated")
-                       {
-                           MessageBox.Show(control.ToString());
-                           this.Controls.Remove(control);
-                           control.Dispose(); // Dispose to release resources
-                       }
-                   }*/
-
+          
 
 
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
@@ -441,32 +430,202 @@ namespace Sample
            
             dataGridView1.Visible = false;
             dataGridView2.Visible = false;
-            dataGridView3.Visible = false;
+            dataGridView3.Visible = true;
             dataGridView4.Visible = false;
-            dataGridView5.Visible = true;
+            dataGridView5.Visible = false;
             arrBoolStateManager[2] = true;
+            for (int i = 0; i < labels.Count; i++)
+            {
+
+                this.Controls.Remove(labels[i]);
+
+            }
+            for (int i = 0; i < textBoxLabel.Count; i++)
+            {
+
+                this.Controls.Remove(textBoxLabel[i]);
+
+            }
+            for (int i = 0; i < comboBoxes.Count; i++)
+            {
+                this.Controls.Remove(comboBoxes[i]);
+            }
+            this.Controls.Remove(btnDate);
+            textBoxLabel.Clear();
+            labelsString.Clear();
+            this.Controls.Remove(dynamicMonthCalendar);
+
+
+
+            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
+
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select * From факты_нарушения", con);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            int k = 0;
+            TableNameGlobal = "факты_нарушения";
+
+            for (int i = 0; i < dataTable.Columns.Count; i++)
+            {
+                if (i == 0) continue;
+                DataColumn column = dataTable.Columns[i];
+                Type columnType = column.DataType;
+                k += 45;
+                Label myLabel = new Label();
+                TextBox newTextBox = new TextBox();
+                if (columnType == typeof(DateTime))
+                {
+                    // Do something specific for DateTime data type
+                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                }
+                newTextBox.Name = "textBox " + column;
+                newTextBox.Location = new Point(600, -5 + k);
+                myLabel.Parent = this.Parent;
+                myLabel.Text = column.ToString();
+                myLabel.Location = new Point(600, -19 + k);
+                myLabel.Name = "lbl" + column;
+                myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
+                this.Controls.Add(myLabel);
+                this.Controls.Add(newTextBox);
+                labels.Add(myLabel);
+                textBoxLabel.Add(newTextBox);
+            }
         }
 
         private void видыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
             dataGridView1.Visible = false;
             dataGridView2.Visible = false;
-            dataGridView3.Visible = true;
+            dataGridView3.Visible = false;
             dataGridView4.Visible = false;
-            dataGridView5.Visible = false;
+            dataGridView5.Visible = true;
             arrBoolStateManager[3] = true;
+            for (int i = 0; i < labels.Count; i++)
+            {
+
+                this.Controls.Remove(labels[i]);
+
+            }
+            for (int i = 0; i < textBoxLabel.Count; i++)
+            {
+
+                this.Controls.Remove(textBoxLabel[i]);
+
+            }
+            for (int i = 0; i < comboBoxes.Count; i++)
+            {
+                this.Controls.Remove(comboBoxes[i]);
+            }
+            this.Controls.Remove(btnDate);
+            textBoxLabel.Clear();
+            labelsString.Clear();
+            this.Controls.Remove(dynamicMonthCalendar);
+
+
+
+            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
+
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select * From виды_нарушения", con);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            int k = 0;
+            TableNameGlobal = "виды_нарушения";
+
+            for (int i = 0; i < dataTable.Columns.Count; i++)
+            {
+                if (i == 0) continue;
+                DataColumn column = dataTable.Columns[i];
+                Type columnType = column.DataType;
+                k += 45;
+                Label myLabel = new Label();
+                TextBox newTextBox = new TextBox();
+                if (columnType == typeof(DateTime))
+                {
+                    // Do something specific for DateTime data type
+                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                }
+                newTextBox.Name = "textBox " + column;
+                newTextBox.Location = new Point(600, -5 + k);
+                myLabel.Parent = this.Parent;
+                myLabel.Text = column.ToString();
+                myLabel.Location = new Point(600, -19 + k);
+                myLabel.Name = "lbl" + column;
+                myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
+                this.Controls.Add(myLabel);
+                this.Controls.Add(newTextBox);
+                labels.Add(myLabel);
+                textBoxLabel.Add(newTextBox);
+            }
+
+         
+            //AddVid_Narush
         }
 
         private void инспекторToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
+
             dataGridView1.Visible = false;
             dataGridView2.Visible = false;
             dataGridView3.Visible = false;
             dataGridView4.Visible = true;
             dataGridView5.Visible = false;
-            arrBoolStateManager[4] = true;
+            arrBoolStateManager[3] = true;
+            for (int i = 0; i < labels.Count; i++)
+            {
+
+                this.Controls.Remove(labels[i]);
+
+            }
+            for (int i = 0; i < textBoxLabel.Count; i++)
+            {
+
+                this.Controls.Remove(textBoxLabel[i]);
+
+            }
+            for (int i = 0; i < comboBoxes.Count; i++)
+            {
+                this.Controls.Remove(comboBoxes[i]);
+            }
+            this.Controls.Remove(btnDate);
+            textBoxLabel.Clear();
+            labelsString.Clear();
+            this.Controls.Remove(dynamicMonthCalendar);
+
+
+
+            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
+
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select * From Инспектор", con);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            int k = 0;
+            TableNameGlobal = "Инспектор";
+
+            for (int i = 0; i < dataTable.Columns.Count; i++)
+            {
+                if (i == 0) continue;
+                DataColumn column = dataTable.Columns[i];
+                Type columnType = column.DataType;
+                k += 45;
+                Label myLabel = new Label();
+                TextBox newTextBox = new TextBox();
+                if (columnType == typeof(DateTime))
+                {
+                    // Do something specific for DateTime data type
+                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                }
+                newTextBox.Name = "textBox " + column;
+                newTextBox.Location = new Point(600, -5 + k);
+                myLabel.Parent = this.Parent;
+                myLabel.Text = column.ToString();
+                myLabel.Location = new Point(600, -19 + k);
+                myLabel.Name = "lbl" + column;
+                myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
+                this.Controls.Add(myLabel);
+                this.Controls.Add(newTextBox);
+                labels.Add(myLabel);
+                textBoxLabel.Add(newTextBox);
+            }
         }
 
         private void dataGridView5_CellContentClick(object sender, DataGridViewCellEventArgs e)
