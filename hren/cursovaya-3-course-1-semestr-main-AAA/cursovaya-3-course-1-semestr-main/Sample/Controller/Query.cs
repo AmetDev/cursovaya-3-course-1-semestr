@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data.OleDb;
 using System.Data;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace Sample.Controller
 {
@@ -137,9 +139,17 @@ namespace Sample.Controller
             command = new OleDbCommand($"INSERT INTO виды_нарушения (наименование_вида_нарушения, [размер штрафа]) VALUES (@name, @price)", connection);
             command.Parameters.AddWithValue("name", name);
             command.Parameters.AddWithValue("price", price);
-
+            command.ExecuteNonQuery();
+            connection.Close();
         }
-
+        public void AddFML(string FML)
+        {
+            connection.Open();
+            command = new OleDbCommand($"INSERT INTO Инспектор (фио_инспектора) VALUES (@FML)", connection);
+            command.Parameters.AddWithValue("FML", FML);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
         public DataTable GetIDOwnder(string firstName, string LastName, string FatherName)
         {
             connection.Open();

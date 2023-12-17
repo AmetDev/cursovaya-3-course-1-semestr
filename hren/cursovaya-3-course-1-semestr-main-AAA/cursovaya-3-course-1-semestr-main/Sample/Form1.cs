@@ -354,6 +354,18 @@ namespace Sample
                     controller.AddCars(code_vladelech, model, gover_number, data_proizvod);
                     dataGridView1.DataSource = controller.UpdateCars();
                     break;
+                case "Инспектор":
+                    string FML = Convert.ToString(argsLablesString[0]);
+                    controller.AddFML(FML);
+                    dataGridView4.DataSource = controller.UpdateInspector();
+                    break;
+                case "виды_нарушения":
+                    string Name = Convert.ToString(argsLablesString[0]);
+                    int Price = Convert.ToInt32(argsLablesString[1]);
+                    controller.AddVid_Narush(Name, Price);
+                    dataGridView5.DataSource = controller.UpdateVidNarush();
+                    break;
+
             }
         }
         private void владельцыToolStripMenuItem_Click(object sender, EventArgs e)
@@ -400,7 +412,7 @@ namespace Sample
                 if (columnType == typeof(DateTime))
                 {
                     // Do something specific for DateTime data type
-                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                    //MessageBox.Show(columnType.ToString());// Set default value or any specific property
                 }
                 newTextBox.Name = "textBox " + column;
                 newTextBox.Location = new Point(600, -5 + k);
@@ -476,13 +488,14 @@ namespace Sample
                 if (columnType == typeof(DateTime))
                 {
                     // Do something specific for DateTime data type
-                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                  //  MessageBox.Show(columnType.ToString());// Set default value or any specific property
                 }
+
                 newTextBox.Name = "textBox " + column;
-                newTextBox.Location = new Point(600, -5 + k);
+                newTextBox.Location = new Point(600, 10 + k);
                 myLabel.Parent = this.Parent;
                 myLabel.Text = column.ToString();
-                myLabel.Location = new Point(600, -19 + k);
+                myLabel.Location = new Point(600, -3 + k);
                 myLabel.Name = "lbl" + column;
                 myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
                 this.Controls.Add(myLabel);
@@ -542,7 +555,7 @@ namespace Sample
                 if (columnType == typeof(DateTime))
                 {
                     // Do something specific for DateTime data type
-                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                   // MessageBox.Show(columnType.ToString());// Set default value or any specific property
                 }
                 newTextBox.Name = "textBox " + column;
                 newTextBox.Location = new Point(600, -5 + k);
@@ -612,7 +625,7 @@ namespace Sample
                 if (columnType == typeof(DateTime))
                 {
                     // Do something specific for DateTime data type
-                    MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                    //MessageBox.Show(columnType.ToString());// Set default value or any specific property
                 }
                 newTextBox.Name = "textBox " + column;
                 newTextBox.Location = new Point(600, -5 + k);
