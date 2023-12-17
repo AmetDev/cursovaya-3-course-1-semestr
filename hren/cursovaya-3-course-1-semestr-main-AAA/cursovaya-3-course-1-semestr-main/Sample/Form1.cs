@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Data.OleDb;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
@@ -115,27 +116,24 @@ namespace Sample
         List<Button> buttonsList = new List<Button>();
         List<string> labelsString = new List<string>();
         List<int> DateIndex = new List<int>();
+        int GlobalCounterForDate=0;
+        int counterTextBox = 0;
         //this is needed for later use
         List<ComboBox> comboBoxes = new List<ComboBox>();
         bool isClickBtnDate = false;
         MonthCalendar dynamicMonthCalendar = new MonthCalendar();
         Button btnDate = new Button();
-        // НАДО БУДЕТ ВЫНЕСТИ ГЛОБАЛЬНО
+        List<Button> btns = new List<Button>();
+  
         private void DynamicMonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            int IndexDate1 = IndexDate - 1;
-            for (int i = 0; i < textBoxLabel.Count; i++)
-            {
-               
-                if (i == IndexDate1)
-                {
-                  
-                    textBoxLabel[IndexDate1].Text = e.Start.ToShortDateString().ToString();
-                    MessageBox.Show($"Selected Date: {e.Start.ToShortDateString()}");
-                    this.Controls.Remove(dynamicMonthCalendar);
+            MessageBox.Show("INDEX"+ IndexDate);
+            int IndexDate1 = IndexDate; 
+             textBoxLabel[IndexDate1].Text = e.Start.ToShortDateString().ToString();
+             MessageBox.Show($"Selected Date: {e.Start.ToShortDateString()}");
+             this.Controls.Remove(dynamicMonthCalendar);
                     
-                }
-            }
+            
 
         }
         void textBox_Enter(object sender, EventArgs e)
@@ -153,7 +151,7 @@ namespace Sample
         }
 
 
-        private void Clciked(object sender, EventArgs e)
+    /*    private void Clciked(object sender, EventArgs e)
         {
             TextBox pressedTextBox = (TextBox)sender;
             foreach (var item in textBoxLabel)
@@ -163,7 +161,7 @@ namespace Sample
                     textBox.Click += new EventHandler(this.textBox_Enter);
                 }
             }
-        }
+        }*/
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
@@ -218,6 +216,10 @@ namespace Sample
             {
                 this.Controls.Remove(comboBoxes[i]);
             }
+            for (int i = 0; i < btns.Count; i++)
+            {
+                this.Controls.Remove(btns[i]);
+            }
             this.Controls.Remove(btnDate);
             textBoxLabel.Clear();
             labelsString.Clear();
@@ -234,16 +236,27 @@ namespace Sample
             TableNameGlobal = "автомобили";
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
+
+                GlobalCounterForDate = i;
                 k += 45;
                 Label myLabel = new Label();
                 TextBox newTextBox = new TextBox();
-                myLabel.Tag  = "DynamicallyGenerated";
-                newTextBox.Tag = "DynamicallyGenerated";
 
-                if (i==0) continue;  
+                myLabel.Tag  = "DynamicallyGenerated";
+                newTextBox.Tag = "textbox";
                
+
+                if (i==0) continue;
+
+                Type textBoxType = typeof(TextBox);
                 DataColumn column = dataTable.Columns[i];
                 Type columnType = column.DataType;
+
+                if ("textbox" == newTextBox.Tag)
+                {
+                    counterTextBox += 1;
+                    // Your code here
+                }
                 if (i == 1)
                 {
                     IndexCodeOwner = i;
@@ -274,7 +287,7 @@ namespace Sample
                
                 if (columnType == typeof(DateTime))
                 {
-                    IndexDate = i;
+                    IndexDate = counterTextBox;
                    
                     dynamicMonthCalendar.Location = new System.Drawing.Point(750, 60 + k);
                     dynamicMonthCalendar.Size = new System.Drawing.Size(200, 180);
@@ -386,6 +399,9 @@ namespace Sample
             {
                 this.Controls.Remove(comboBoxes[i]);
             }
+            for (int i = 0; i < btns.Count; i++){
+                this.Controls.Remove(btns[i]);
+            }
             this.Controls.Remove(btnDate);
             textBoxLabel.Clear();
             labelsString.Clear();
@@ -436,10 +452,36 @@ namespace Sample
           
             arrBoolStateManager[1] = true;
         }
-  
+        private void ToClickBtn(object sender, EventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+
+            // Извлекаем значение column.ColumnName из свойства Tag
+            string columnName = clickedButton.Tag as string;
+            MessageBox.Show(columnName + "");            // Теперь у вас есть значение column.ColumnName, которое можно использовать
+            // например, вывести его в консоль или передать в другую функцию
+           
+            switch (columnName)
+            {
+                case "код_автомобиля":
+                    MessageBox.Show("Clicked column: " + columnName);
+                    break;
+                case "код_владельца":
+                    MessageBox.Show("Clicked column: " + columnName);
+                    break;
+                case "код_инспектора":
+                    MessageBox.Show("Clicked column: " + columnName);
+                    break;
+                case "код_вида_нарушения":
+                    MessageBox.Show("Clicked column: " + columnName); 
+                    break;
+
+            }
+        }
+
         private void фактыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
             dataGridView1.Visible = false;
             dataGridView2.Visible = false;
             dataGridView3.Visible = true;
@@ -462,6 +504,10 @@ namespace Sample
             {
                 this.Controls.Remove(comboBoxes[i]);
             }
+            for (int i = 0; i < btns.Count; i++)
+            {
+                this.Controls.Remove(btns[i]);
+            }
             this.Controls.Remove(btnDate);
             textBoxLabel.Clear();
             labelsString.Clear();
@@ -476,36 +522,82 @@ namespace Sample
             dataAdapter.Fill(dataTable);
             int k = 0;
             TableNameGlobal = "факты_нарушения";
-
+     
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
-                if (i == 0) continue;
+                GlobalCounterForDate = i;
+
+                k += 45;
                 DataColumn column = dataTable.Columns[i];
                 Type columnType = column.DataType;
-                k += 45;
-                Label myLabel = new Label();
+                int counterTextBox = 0;
+                if (i == 0) continue; // Пропускаем первый столбец
+             
+                if (column.ColumnName == "код_владельца" ||
+                    column.ColumnName == "код_автомобиля" ||
+                    column.ColumnName == "код_вида_нарушения" ||
+                    column.ColumnName == "код_инспектора")
+                {
+                    Button btnlocal = new Button();
+                    btnlocal.Text = column.ColumnName;
+                    btnlocal.Name = "btn" + column.ColumnName;
+                    btnlocal.Location = new Point(600, 10 + k);
+                    btnlocal.Tag = column.ColumnName;
+
+                    // Добавляем обработчик события Click только один раз
+                    btnlocal.Click += new EventHandler(ToClickBtn);
+
+                    btns.Add(btnlocal);
+                    continue;
+                }
                 TextBox newTextBox = new TextBox();
+                newTextBox.Name = "textBox " + column.ColumnName;
+                newTextBox.Location = new Point(600, 10 + k);
+                if ("textbox" == newTextBox.Tag)
+                {
+                    counterTextBox += 1;
+                    // Your code here
+                }
                 if (columnType == typeof(DateTime))
                 {
-                    // Do something specific for DateTime data type
-                  //  MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                    IndexDate = counterTextBox;
+
+                    dynamicMonthCalendar.Location = new System.Drawing.Point(750, 60 + k);
+                    dynamicMonthCalendar.Size = new System.Drawing.Size(200, 180);
+                    btnDate.Name = "date";
+                    btnDate.Text = "выберите дату";
+                    btnDate.Tag = "DynamicallyGenerated";
+                    btnDate.Size = new System.Drawing.Size(100, 25);
+                    btnDate.Location = new System.Drawing.Point(700, -51 + k);
+                    btnDate.Click += new EventHandler(this.textBox_Enter);
+                    this.Controls.Add(btnDate);
+
+
+                }
+                // Добавляем все кнопки в Controls только после того, как им добавлен обработчик
+                foreach (var item in btns)
+                {
+                    this.Controls.Add(item);
                 }
 
-                newTextBox.Name = "textBox " + column;
-                newTextBox.Location = new Point(600, 10 + k);
+                // Если столбец не соответствует условиям, добавляем Label и TextBox
+             
+                Label myLabel = new Label();
                 myLabel.Parent = this.Parent;
-                myLabel.Text = column.ToString();
+                myLabel.Text = column.ColumnName;
                 myLabel.Location = new Point(600, -3 + k);
-                myLabel.Name = "lbl" + column;
-                myLabel.AutoSize = true; // Автоматическое изменение размера метки в соответствии с содержимым
+                myLabel.Name = "lbl" + column.ColumnName;
+                myLabel.AutoSize = true;
+
                 this.Controls.Add(myLabel);
                 this.Controls.Add(newTextBox);
+
                 labels.Add(myLabel);
                 textBoxLabel.Add(newTextBox);
             }
         }
 
-        private void видыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
+            private void видыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dataGridView1.Visible = false;
             dataGridView2.Visible = false;
@@ -528,6 +620,10 @@ namespace Sample
             for (int i = 0; i < comboBoxes.Count; i++)
             {
                 this.Controls.Remove(comboBoxes[i]);
+            }
+            for (int i = 0; i < btns.Count; i++)
+            {
+                this.Controls.Remove(btns[i]);
             }
             this.Controls.Remove(btnDate);
             textBoxLabel.Clear();
@@ -598,6 +694,10 @@ namespace Sample
             for (int i = 0; i < comboBoxes.Count; i++)
             {
                 this.Controls.Remove(comboBoxes[i]);
+            }
+            for (int i = 0; i < btns.Count; i++)
+            {
+                this.Controls.Remove(btns[i]);
             }
             this.Controls.Remove(btnDate);
             textBoxLabel.Clear();
