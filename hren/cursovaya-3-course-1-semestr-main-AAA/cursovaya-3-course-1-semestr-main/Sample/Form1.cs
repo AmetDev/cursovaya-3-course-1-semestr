@@ -127,14 +127,11 @@ namespace Sample
   
         private void DynamicMonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            MessageBox.Show("INDEX"+ IndexDate);
+           // MessageBox.Show("INDEX"+ IndexDate);
             int IndexDate1 = IndexDate; 
-             textBoxLabel[IndexDate1].Text = e.Start.ToShortDateString().ToString();
+             textBoxLabel[1].Text = e.Start.ToShortDateString().ToString();
              MessageBox.Show($"Selected Date: {e.Start.ToShortDateString()}");
              this.Controls.Remove(dynamicMonthCalendar);
-                    
-            
-
         }
         void textBox_Enter(object sender, EventArgs e)
         {
