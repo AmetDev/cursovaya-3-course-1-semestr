@@ -64,7 +64,10 @@ namespace Sample
 
         private void button3_Click(object sender, EventArgs e)
         {
-            controller.Delete(int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["ID"].Value.ToString()));
+
+            controller.DeleteAll(TableNameGlobal, int.Parse(dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString()));
+
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -432,8 +435,7 @@ namespace Sample
                 TextBox newTextBox = new TextBox();
                 if (columnType == typeof(DateTime))
                 {
-                    // Do something specific for DateTime data type
-                    //MessageBox.Show(columnType.ToString());// Set default value or any specific property
+                   
                 }
                 newTextBox.Name = "textBox " + column;
                 newTextBox.Location = new Point(600, -5 + k);

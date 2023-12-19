@@ -69,6 +69,22 @@ namespace Sample.Controller
             connection.Close();
             return bufferTable;
         }
+        public void DeleteAll(string arg, int ID)
+        {
+            try
+            {
+                MessageBox.Show(arg);
+                MessageBox.Show(Convert.ToString(ID));
+                connection.Open();
+                command = new OleDbCommand($"DELETE FROM {arg} WHERE ID = {ID}", connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
 
         public DataTable UpdateUsers()
         {
