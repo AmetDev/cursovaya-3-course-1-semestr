@@ -142,6 +142,21 @@ namespace Sample.Controller
             command.ExecuteNonQuery();
             connection.Close();
         }
+        public void AddFactsInDB(int avto, int insector, int vlad, int vid, string data, string fio, bool right)
+        {
+            connection.Open();
+            command = new OleDbCommand("INSERT INTO факты_нарушения (код_автомобиля, код_инспектора, код_владельца, код_вида_нарушения, дата_нарушения, фио_водителя, [право управления]) VALUES (@avto, @insector, @vlad, @vid, @data, @fio, @right)", connection);
+            command.Parameters.AddWithValue("@avto", avto);
+            command.Parameters.AddWithValue("@insector", insector);
+            command.Parameters.AddWithValue("@vlad", vlad);
+            command.Parameters.AddWithValue("@vid", vid);
+            command.Parameters.AddWithValue("@data", data);
+            command.Parameters.AddWithValue("@fio", fio);
+            command.Parameters.AddWithValue("@right", right);
+            command.ExecuteNonQuery();
+            connection.Close();
+
+        }
         public void AddFML(string FML)
         {
             connection.Open();
