@@ -24,6 +24,39 @@ namespace Sample.Controller
             bufferTable = new DataTable();
         }
 
+        public void EditOwner(string FirstName, string LastName, string FatherName, string Category)
+        {
+            connection.Open();
+            command = new OleDbCommand($"UPDATE  владельцы SET (Имя, Фамилия, Отчество, Категория_прав) VALUES(@FirstName, @LastName, @FatherName, @Category)", connection);
+            command.Parameters.AddWithValue("FirstName", FirstName);
+            command.Parameters.AddWithValue("LastName", LastName);
+            command.Parameters.AddWithValue("FatherName", FatherName);
+            command.Parameters.AddWithValue("Category", Category);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        public void EditAvtorr(int code, string model, string gos_number, string data)
+        {
+            connection.Open();
+            command = new OleDbCommand("UPDATE автомобили SET код_владельца = @code, модель = @model, гос_номер = @gos_number, дата_производства = @data WHERE код_автомобиля = @code", connection);
+
+            // Replace @carCode with the appropriate parameter for your condition.
+
+            command.Parameters.AddWithValue("@code", code);
+            command.Parameters.AddWithValue("@model", model);
+            command.Parameters.AddWithValue("@gos_number", gos_number);
+            command.Parameters.AddWithValue("@data", data);
+
+
+            // Check if the parameter names in your query match the ones above.
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+
+
+
+
         public DataTable UpdatePerson()
         {
             connection.Open();
