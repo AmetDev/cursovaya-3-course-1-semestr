@@ -99,7 +99,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(799, 83);
+            this.button3.Location = new System.Drawing.Point(867, 83);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(204, 23);
             this.button3.TabIndex = 3;
@@ -109,7 +109,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(799, 151);
+            this.button4.Location = new System.Drawing.Point(867, 151);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(203, 26);
             this.button4.TabIndex = 8;
@@ -119,7 +119,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(799, 112);
+            this.button5.Location = new System.Drawing.Point(867, 112);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(204, 33);
             this.button5.TabIndex = 13;
@@ -198,7 +198,7 @@
             this.dataGridView1.DataSource = this.автомобилиBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(23, 37);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(552, 196);
+            this.dataGridView1.Size = new System.Drawing.Size(552, 392);
             this.dataGridView1.TabIndex = 15;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
@@ -253,9 +253,9 @@
             this.отчествоDataGridViewTextBoxColumn,
             this.категорияправDataGridViewTextBoxColumn});
             this.dataGridView2.DataSource = this.владельцыBindingSource;
-            this.dataGridView2.Location = new System.Drawing.Point(23, 83);
+            this.dataGridView2.Location = new System.Drawing.Point(23, 37);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(552, 196);
+            this.dataGridView2.Size = new System.Drawing.Size(552, 383);
             this.dataGridView2.TabIndex = 16;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
@@ -308,9 +308,9 @@
             this.фиоводителяDataGridViewTextBoxColumn,
             this.правоУправленияDataGridViewCheckBoxColumn});
             this.dataGridView3.DataSource = this.фактынарушенияBindingSource;
-            this.dataGridView3.Location = new System.Drawing.Point(23, 140);
+            this.dataGridView3.Location = new System.Drawing.Point(23, 27);
             this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(552, 196);
+            this.dataGridView3.Size = new System.Drawing.Size(552, 383);
             this.dataGridView3.TabIndex = 17;
             this.dataGridView3.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
             // 
@@ -375,9 +375,9 @@
             this.кодинспектораDataGridViewTextBoxColumn1,
             this.фиоинспектораDataGridViewTextBoxColumn});
             this.dataGridView4.DataSource = this.инспекторBindingSource;
-            this.dataGridView4.Location = new System.Drawing.Point(23, 185);
+            this.dataGridView4.Location = new System.Drawing.Point(23, 28);
             this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(552, 196);
+            this.dataGridView4.Size = new System.Drawing.Size(552, 392);
             this.dataGridView4.TabIndex = 18;
             this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
             // 
@@ -407,9 +407,9 @@
             this.наименованиевиданарушенияDataGridViewTextBoxColumn,
             this.размерШтрафаDataGridViewTextBoxColumn});
             this.dataGridView5.DataSource = this.видынарушенияBindingSource;
-            this.dataGridView5.Location = new System.Drawing.Point(23, 198);
+            this.dataGridView5.Location = new System.Drawing.Point(23, 27);
             this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(552, 196);
+            this.dataGridView5.Size = new System.Drawing.Size(552, 392);
             this.dataGridView5.TabIndex = 19;
             this.dataGridView5.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellContentClick_1);
             // 
@@ -438,7 +438,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(799, 27);
+            this.button6.Location = new System.Drawing.Point(867, 27);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(203, 26);
             this.button6.TabIndex = 21;
@@ -468,7 +468,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(799, 59);
+            this.button7.Location = new System.Drawing.Point(867, 59);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(204, 23);
             this.button7.TabIndex = 22;
@@ -479,7 +479,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(809, 214);
+            this.comboBox1.Location = new System.Drawing.Point(877, 214);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(192, 21);
             this.comboBox1.TabIndex = 23;
@@ -488,7 +488,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(813, 198);
+            this.label1.Location = new System.Drawing.Point(874, 198);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 24;
@@ -497,7 +497,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(848, 198);
+            this.label2.Location = new System.Drawing.Point(916, 198);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 25;
