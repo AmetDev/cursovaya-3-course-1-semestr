@@ -56,11 +56,35 @@
     </Compile>
     <Compile Include="Controller\ConnectionString.cs" />
     <Compile Include="Controller\Query.cs" />
+    <Compile Include="EditFacts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditFacts.Designer.cs">
+      <DependentUpon>EditFacts.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditForm.Designer.cs">
       <DependentUpon>EditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditFormVladelez.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditFormVladelez.Designer.cs">
+      <DependentUpon>EditFormVladelez.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditInspector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditInspector.Designer.cs">
+      <DependentUpon>EditInspector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditVid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditVid.Designer.cs">
+      <DependentUpon>EditVid.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

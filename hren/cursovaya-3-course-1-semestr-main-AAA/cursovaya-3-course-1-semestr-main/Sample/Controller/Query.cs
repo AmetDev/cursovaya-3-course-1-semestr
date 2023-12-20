@@ -24,7 +24,7 @@ namespace Sample.Controller
             bufferTable = new DataTable();
         }
 
-        public void EditOwner(string FirstName, string LastName, string FatherName, string Category)
+        /*public void EditOwner(int code, string FirstName, string LastName, string FatherName, string Category)
         {
             connection.Open();
             command = new OleDbCommand($"UPDATE  владельцы SET (Имя, Фамилия, Отчество, Категория_прав) VALUES(@FirstName, @LastName, @FatherName, @Category)", connection);
@@ -34,26 +34,81 @@ namespace Sample.Controller
             command.Parameters.AddWithValue("Category", Category);
             command.ExecuteNonQuery();
             connection.Close();
+        }*/
+        public void EditOwner(int code, string FirstName, string LastName, string FatherName, string Category)
+        {
+            connection.Open();
+
+            // Используем SET для установки новых значений и WHERE для условия по коду владельца
+            command = new OleDbCommand($"UPDATE владельцы SET Имя = @FirstName, Фамилия = @LastName, Отчество = @FatherName, Категория_прав = @Category WHERE код_владельца = {code}", connection);
+
+            // Добавляем параметры к запросу
+            command.Parameters.AddWithValue("@FirstName", FirstName);
+            command.Parameters.AddWithValue("@LastName", LastName);
+            command.Parameters.AddWithValue("@FatherName", FatherName);
+            command.Parameters.AddWithValue("@Category", Category);
+
+
+            // Выполняем запрос
+            command.ExecuteNonQuery();
+
+            // Закрываем соединение
+            connection.Close();
         }
+        public void UpdateInspectorData(int id, string fullname)
+        {
+            connection.Open();
+            command = new OleDbCommand($"UPDATE Инспектор SET фио_инспектора = @fullname WHERE код_инспектора = {id}", connection);
+            command.Parameters.AddWithValue("fullname", fullname);
+            command.Parameters.AddWithValue("id", id);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+
+        public void UpdateFactsInDB(int zero, int avto, int insector, int vlad, int vid, string data, string fio, bool right=false)
+        {
+            connection.Open();
+            command = new OleDbCommand($"UPDATE факты_нарушения SET код_инспектора = @insector, код_владельца = @vlad, код_вида_нарушения = @vid, дата_нарушения = @data, фио_водителя = @fio, [право управления] = @right WHERE код_владельца = {zero}", connection);
+            command.Parameters.AddWithValue("@avto", avto);
+            command.Parameters.AddWithValue("@insector", insector);
+            command.Parameters.AddWithValue("@vlad", vlad);
+            command.Parameters.AddWithValue("@vid", vid);
+            command.Parameters.AddWithValue("@data", data);
+            command.Parameters.AddWithValue("@fio", fio);
+            command.Parameters.AddWithValue("@right", right);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+
+
         public void EditAvtorr(int code, string model, string gos_number, string data)
         {
             connection.Open();
-            command = new OleDbCommand("UPDATE автомобили SET код_владельца = @code, модель = @model, гос_номер = @gos_number, дата_производства = @data WHERE код_автомобиля = @code", connection);
-
-            // Replace @carCode with the appropriate parameter for your condition.
-
+            command = new OleDbCommand("UPDATE автомобили SET код_владельца = @code, модель = @model, гос_номер = @gos_number, дата_производства = @data WHERE код_владельца = @code", connection);
             command.Parameters.AddWithValue("@code", code);
             command.Parameters.AddWithValue("@model", model);
             command.Parameters.AddWithValue("@gos_number", gos_number);
             command.Parameters.AddWithValue("@data", data);
 
-
-            // Check if the parameter names in your query match the ones above.
-
             command.ExecuteNonQuery();
             connection.Close();
         }
+        public void EditVidCon(int code, string name, int price)
+        {
+            connection.Open();
 
+            // Используем оператор UPDATE для изменения записи
+            command = new OleDbCommand($"UPDATE виды_нарушения SET наименование_вида_нарушения = @name, [размер штрафа] = @price WHERE код_вида_нарушения = {code}", connection);
+
+            // Передаем параметры в запрос
+            command.Parameters.AddWithValue("@name", name);
+            command.Parameters.AddWithValue("@price", price);
+            // Выполняем команду
+            command.ExecuteNonQuery();
+
+            // Закрываем соединение
+            connection.Close();
+        }
 
 
 
@@ -107,8 +162,7 @@ namespace Sample.Controller
         {
             try
             {
-                MessageBox.Show(arg);
-                MessageBox.Show(Convert.ToString(ID));
+               
                 connection.Open();
                 command = new OleDbCommand($"DELETE FROM {arg} WHERE {column} = {ID}", connection);
                 command.ExecuteNonQuery();

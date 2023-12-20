@@ -64,8 +64,7 @@ namespace Sample
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(TableNameGlobal);
-            MessageBox.Show(codeColumn);
+           
             if (dataGridView4.Visible == true)
             {
                 controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString()));
@@ -150,6 +149,7 @@ namespace Sample
         int GlobalCounterForDate = 0;
         int counterTextBox = 0;
         //this is needed for later use
+        private int selectedComboBoxIndex = -1;
         List<ComboBox> comboBoxes = new List<ComboBox>();
         bool isClickBtnDate = false;
         MonthCalendar dynamicMonthCalendar = new MonthCalendar();
@@ -201,7 +201,8 @@ namespace Sample
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-            if (comboBox != null)
+
+            if (comboBox != null && comboBox.SelectedItem != null)
             {
                 string selectedValue = comboBox.SelectedItem.ToString();
 
@@ -228,9 +229,15 @@ namespace Sample
                         MessageBox.Show("No data found.");
                     }
 
+                    selectedComboBoxIndex = comboBox.SelectedIndex;
+
+                    // Сброс индекса, чтобы снова вызывать SelectedIndexChanged при следующем выборе
+                    
                 }
             }
         }
+
+
 
 
 
@@ -305,6 +312,9 @@ namespace Sample
                     IndexCodeOwner = i;
                     //this is needed for later use
                     ComboBox comboBox = new ComboBox();
+
+                    comboBox.Items.Clear(); // Очистка предыдущих элементов
+                   
                     comboBox.Name = "comboBox_" + column.ColumnName; // Assign a unique name
                     comboBox.Location = new Point(600, -50 + k);
                     comboBox.Tag = "DynamicallyGenerated";
@@ -408,6 +418,7 @@ namespace Sample
                     string data_proizvod = argsLablesString[3];
                     controller.AddCars(code_vladelech, model, gover_number, data_proizvod);
                     dataGridView1.DataSource = controller.UpdateCars();
+                    selectedComboBoxIndex = -1;
                     break;
                 case "Инспектор":
                     string FML = Convert.ToString(argsLablesString[0]);
@@ -530,42 +541,8 @@ namespace Sample
 
         private void EditAvto(int ID)
         {
-            IndexDate = 0;
-            checkavto = 0;
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = true;
-            dataGridView4.Visible = false;
-            dataGridView5.Visible = false;
-            arrBoolStateManager[2] = true;
-            foreach (var item in comboFacts)
-            {
-                this.Controls.Remove(item);
-            }
-            for (int i = 0; i < labels.Count; i++)
-            {
+            
 
-                this.Controls.Remove(labels[i]);
-
-            }
-            for (int i = 0; i < textBoxLabel.Count; i++)
-            {
-
-                this.Controls.Remove(textBoxLabel[i]);
-
-            }
-            for (int i = 0; i < comboBoxes.Count; i++)
-            {
-                this.Controls.Remove(comboBoxes[i]);
-            }
-            for (int i = 0; i < btns.Count; i++)
-            {
-                this.Controls.Remove(btns[i]);
-            }
-            this.Controls.Remove(btnDate);
-            textBoxLabel.Clear();
-            labelsString.Clear();
-            this.Controls.Remove(dynamicMonthCalendar);
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
 
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter($"Select * From автомобили WHERE код_автомобиля={ID}", con);
@@ -591,196 +568,107 @@ namespace Sample
 
 
         }
-    
-
-        /*   private void EditAvto(int ID)
-           {
-               OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
-
-               OleDbDataAdapter dataAdapter = new OleDbDataAdapter($"Select * From автомобили WHERE код_автомобиля={ID}", con);
-               DataTable dataTable = new DataTable();
-               dataAdapter.Fill(dataTable);
-               int k = 0;
-               TableNameGlobal = "автомобили";
-               codeColumn = "код_автомобиля";
-               for (int i = 0; i < dataTable.Columns.Count; i++)
-               {
-                   GlobalCounterForDate = i;
-
-                   k += 45;
-                   DataColumn column = dataTable.Columns[i];
-                   Type columnType = column.DataType;
-                   int counterTextBox = 0;
-                   if (i == 0) continue; // Пропускаем первый столбец
-
-                   if (column.ColumnName == "код_автомобиля")
-                   {
-
-                       OleDbDataAdapter dataAdapter1 = new OleDbDataAdapter("SELECT * FROM автомобили", con);
-                       DataTable dataTable1 = new DataTable();
-                       dataAdapter1.Fill(dataTable1);
-
-                       OleDbDataAdapter dataAdapter2 = new OleDbDataAdapter("SELECT * FROM владельцы", con);
-                       DataTable dataTable2 = new DataTable();
-                       dataAdapter2.Fill(dataTable2);
-
-                       ComboBox comboBox = new ComboBox();
-                       comboBox.Text = column.ColumnName;
-                       comboBox.Location = new Point(600, 0 + k);
-                       comboBox.Width = 200;
-                       comboBox.Height = 50;
-                       comboBox.Tag = "tag" + column.ColumnName;
-                       comboBox.Name = "name" + column.ColumnName;
-
-
-                       List<string> carCodes = new List<string>();
-                       List<string> ownerCodes = new List<string>();
-
-                       foreach (DataRow row1 in dataTable1.Rows)
-                       {
-                           foreach (DataRow row2 in dataTable2.Rows)
-                           {
-                               if (row1["код_владельца"].ToString() == row2["код_владельца"].ToString())
-                               {
-                                   string model = $"{row1["модель"]}";
-                                   string fullName = $"{row2["Фамилия"]} {row2["Имя"]} {row2["Отчество"]}";
-                                   string ownerCode = $"{row2["код_владельца"]}";
-                                   string carCode = $"{row1["код_автомобиля"]}";
-                                   comboBox.SelectedIndex = Convert.ToInt32(row1["модель"]);
-
-                                   comboBox.Items.Add($"модель: {model}, владелец: {fullName}");
-
-                                   // Добавляем коды в списки
-                                   carCodes.Add(carCode);
-                                   ownerCodes.Add(ownerCode);
-                               }
-                           }
-                       }
-
-                       comboFacts.Add(comboBox);
-                       foreach (var item in comboFacts)
-                       {
-                           if (item == comboBox)
-                           {
-                               this.Controls.Add(item);
-                           }
-                       }
-
-                       // Добавляем обработчик события SelectedIndexChanged после цикла
-                       comboBox.SelectedIndexChanged += (selectedSender, selectedEvent) =>
-                       {
-                           if (comboBox.SelectedIndex != -1)
-                           {
-                               int selectedIndex = comboBox.SelectedIndex;
-                               MessageBox.Show($"Выбран автомобиль с кодом {carCodes[selectedIndex]} и владельцем с кодом {ownerCodes[selectedIndex]}");
-                               avtocode = Convert.ToInt32(carCodes[selectedIndex]);
-                               code_owner = Convert.ToInt32(ownerCodes[selectedIndex]);
-
-
-                           }
-                       };
-                       comboFacts.Add(comboBox);
-                       foreach (var item in comboFacts)
-                       {
-                           if (item == comboBox)
-                           {
-                               this.Controls.Add(item);
-                           }
-                       }
-                       continue;
-                   }
-                   TextBox newTextBox = new TextBox();
-                   newTextBox.Name = "textBox " + column.ColumnName;
-                   newTextBox.Location = new Point(600, 10 + k);
-                   if ("textbox" == newTextBox.Tag)
-                   {
-                       counterTextBox += 1;
-                       // Your code here
-                   }
-                   if (columnType == typeof(DateTime))
-                   {
-                       IndexDate = counterTextBox;
-
-                       dynamicMonthCalendar.Location = new System.Drawing.Point(750, 60 + k);
-                       dynamicMonthCalendar.Size = new System.Drawing.Size(200, 180);
-                       btnDate.Name = "date";
-                       btnDate.Text = "выберите дату";
-                       btnDate.Tag = "DynamicallyGenerated";
-                       btnDate.Size = new System.Drawing.Size(100, 25);
-                       btnDate.Location = new System.Drawing.Point(695, 10 + k);
-                       btnDate.Click += new EventHandler(this.textBox_Enter);
-                       this.Controls.Add(btnDate);
-
-
-                   }
-                   // Добавляем все кнопки в Controls только после того, как им добавлен обработчик
-                   foreach (var item in btns)
-                   {
-                       this.Controls.Add(item);
-                   }
-
-                   // Если столбец не соответствует условиям, добавляем Label и TextBox
-
-                   Label myLabel = new Label();
-                   myLabel.Parent = this.Parent;
-                   myLabel.Text = column.ColumnName;
-                   myLabel.Location = new Point(600, -3 + k);
-                   myLabel.Name = "lbl" + column.ColumnName;
-                   myLabel.AutoSize = true;
-
-                   this.Controls.Add(myLabel);
-                   this.Controls.Add(newTextBox);
-
-                   labels.Add(myLabel);
-                   textBoxLabel.Add(newTextBox);
-
-               }
-
-           }*/
-
-
-
-        private void FillDataById(int id)
+        private void EditVid(int ID)
         {
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
-            // Получаем данные из таблицы "автомобили" по ID
-            string query = $"SELECT * FROM автомобили WHERE ID = {id}";
-            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, con);
+
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter($"Select * From виды_нарушения WHERE код_вида_нарушения={ID}", con);
             DataTable dataTable = new DataTable();
             dataAdapter.Fill(dataTable);
 
+            // Проверка наличия данных
             if (dataTable.Rows.Count > 0)
             {
-                // Предположим, что у вас есть ComboBox для кода владельца с именем "comboCodeOwner"
-                ComboBox comboCodeOwner = comboBoxes.FirstOrDefault(c => c.Name == "comboCodeOwner");
-                if (comboCodeOwner != null)
-                {
-                    comboCodeOwner.SelectedItem = dataTable.Rows[0]["код_владельца"].ToString();
-                }
+                DataRow row = dataTable.Rows[0];
 
-                // Предположим, что у вас есть TextBox для модели с именем "textBoxModel"
-                TextBox textBoxModel = textBoxLabel.FirstOrDefault(t => t.Name == "textBoxModel");
-                if (textBoxModel != null)
-                {
-                    textBoxModel.Text = dataTable.Rows[0]["модель"].ToString();
-                }
+                // Извлеките данные из строки и передайт их в новую форму
+                int ownerCode = Convert.ToInt32(row["код_вида_нарушения"]);
+                string model = $"{row["наименование_вида_нарушения"]}";
+                int licensePlate = Convert.ToInt32(row["размер штрафа"]);
+                EditVid EditVid = new EditVid(ownerCode, model, licensePlate);
+                EditVid.ShowDialog();
+            }
 
-                // Предположим, что у вас есть TextBox для гос. номера с именем "textBoxLicensePlate"
-                TextBox textBoxLicensePlate = textBoxLabel.FirstOrDefault(t => t.Name == "textBoxLicensePlate");
-                if (textBoxLicensePlate != null)
-                {
-                    textBoxLicensePlate.Text = dataTable.Rows[0]["гос_номер"].ToString();
-                }
 
-                // Предположим, что у вас есть TextBox для даты производства с именем "textBoxProductionDate"
-                TextBox textBoxProductionDate = textBoxLabel.FirstOrDefault(t => t.Name == "textBoxProductionDate");
-                if (textBoxProductionDate != null)
-                {
-                    textBoxProductionDate.Text = dataTable.Rows[0]["дата_производства"].ToString();
-                }
+
+        }
+        private void EditInspector(int ID)
+        {
+            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
+
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter($"Select * From Инспектор WHERE код_инспектора={ID}", con);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+
+            // Проверка наличия данных
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                // Извлеките данные из строки и передайт их в новую форму
+                int ownerCode = Convert.ToInt32(row["код_инспектора"]);
+                string name = $"{row["фио_инспектора"]}";
+                EditInspector EditInspector = new EditInspector(ownerCode, name);
+                EditInspector.ShowDialog();
+            }
+
+
+
+        }
+        private void EditVladelez(int ID)
+        {
+
+            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
+
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter($"Select * From владельцы WHERE код_владельца={ID}", con);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+
+            // Проверка наличия данных
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                // Извлеките данные из строки и передайте их в новую форму
+                int codezero = Convert.ToInt32(row["код_владельца"]);
+                string ownerCode = $"{row["Имя"]}";
+                string model = $"{row["Фамилия"]}";
+                string licensePlate = $"{row["Отчество"]}";
+                string productionDate = $"{row["Категория_прав"]}";
+
+                // Создайте и покажите новую форму для редактирования
+                EditFormVladelez EditFormVladelez = new EditFormVladelez(codezero, ownerCode, model, licensePlate, productionDate);
+                EditFormVladelez.ShowDialog();
+            }
+
+        }
+        private void EditFacts(int ID)
+        {
+            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
+
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter($"Select * From факты_нарушения WHERE код_нарушения={ID}", con);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+
+            // Проверка наличия данных
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                // Извлеките данные из строки и передайте их в новую форму
+                int codezero = Convert.ToInt32(row["код_нарушения"]);
+                int code_avto = Convert.ToInt32(row["код_автомобиля"]);
+                int insp = Convert.ToInt32(row["код_инспектора"]);
+                int vlad = Convert.ToInt32(row["код_владельца"]);
+                int vid = Convert.ToInt32(row["код_вида_нарушения"]);
+                string data_narush = $"{row["дата_нарушения"]}";
+                string fio_voditel = $"{row["фио_водителя"]}";
+
+                // Создайте и покажите новую форму для редактирования
+                EditFacts EditFacts = new EditFacts(codezero, code_avto, insp, vlad, vid, data_narush, fio_voditel);
+                EditFacts.ShowDialog();
             }
         }
-
 
         private void фактыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1064,16 +952,21 @@ namespace Sample
                     DataTable dataTable2 = new DataTable();
                     dataAdapter2.Fill(dataTable2);
 
+
+                    List<string> carCodes = new List<string>();
+                    List<string> ownerCodes = new List<string>();
                     ComboBox comboBox = new ComboBox();
+                    comboBox.Items.Clear(); // Очистка предыдущих элементов
+                    carCodes.Clear(); // Очистка предыдущих кодов автомобилей
+                    ownerCodes.Clear(); // Очистка предыдущих кодов владельцев
                     comboBox.Text = column.ColumnName;
                     comboBox.Location = new Point(600, 0 + k);
                     comboBox.Width = 200;
                     comboBox.Height = 50;
                     comboBox.Tag = "tag" + column.ColumnName;
                     comboBox.Name = "name" + column.ColumnName;
+   
 
-                    List<string> carCodes = new List<string>();
-                    List<string> ownerCodes = new List<string>();
 
                     foreach (DataRow row1 in dataTable1.Rows)
                     {
@@ -1095,15 +988,6 @@ namespace Sample
                         }
                     }
 
-                    comboFacts.Add(comboBox);
-                    foreach (var item in comboFacts)
-                    {
-                        if(item==comboBox)
-                        {
-                            this.Controls.Add(item);
-                        }
-                    }
-
                     // Добавляем обработчик события SelectedIndexChanged после цикла
                     comboBox.SelectedIndexChanged += (selectedSender, selectedEvent) =>
                     {
@@ -1120,12 +1004,14 @@ namespace Sample
                     comboFacts.Add(comboBox);
                     foreach (var item in comboFacts)
                     {
-                        if (item == comboBox)
+                        if(item==comboBox)
                         {
                             this.Controls.Add(item);
                         }
                     }
                     continue;
+
+              
                 }
 
 
@@ -1375,19 +1261,19 @@ namespace Sample
             {
                 arr[3] = true;
                 // controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString()));
-              /*  EditAvto(int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()));
-                dataGridView4.DataSource = controller.UpdateInspector();*/
-               
+                EditInspector(int.Parse(dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString()));
+                dataGridView4.DataSource = controller.UpdateInspector();
+
             }
             if (dataGridView3.Visible == true)
             {
-                controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[0].Value.ToString()));
+                EditFacts(int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[0].Value.ToString()));
                 dataGridView3.DataSource = controller.UpdateFacts();
             }
             if (dataGridView2.Visible == true)
             {
                 //controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[0].Value.ToString()));
-
+                EditVladelez(int.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[3].Value.ToString()));
                 dataGridView2.DataSource = controller.UpdatePerson();
                 //EditOwner
             }
@@ -1397,15 +1283,11 @@ namespace Sample
                 /* controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()));
                  dataGridView1.DataSource = controller.UpdateCars();*/
                 EditAvto(int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()));
-                //int code, string model, string gos_number, string data
-
-
-                //controller.EditAvtor(code_car_vlad_update, update_model, gos_nubmer_update, date_update);
                 dataGridView1.DataSource = controller.UpdateCars();
             }
             if (dataGridView5.Visible == true)
             {
-                controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView5.Rows[dataGridView5.CurrentRow.Index].Cells[0].Value.ToString()));
+                EditVid(int.Parse(dataGridView5.Rows[dataGridView5.CurrentRow.Index].Cells[0].Value.ToString()));
                 dataGridView5.DataSource = controller.UpdateVidNarush();
             }
 
