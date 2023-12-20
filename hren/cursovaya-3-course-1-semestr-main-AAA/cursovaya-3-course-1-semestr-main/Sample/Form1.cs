@@ -34,6 +34,7 @@ namespace Sample
         public Form1(bool isCheck)
         {
             InitializeComponent();
+            label2.Text = "";
             controller = new Query(ConnectionString.ConnStr);
             Checks = new CheckAdmin(); // создаем экземпляр класса CheckAdmin
             if (isCheck)
@@ -243,6 +244,10 @@ namespace Sample
 
         private void автомобилиToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            comboBox1.Items.Clear();
+            comboBox1.Text = "";
+
+
             checkavto = 1;
             IndexDate = 0;
             foreach (var item in comboFacts)
@@ -284,6 +289,14 @@ namespace Sample
             int k = 0;
             TableNameGlobal = "автомобили";
             codeColumn = "код_автомобиля";
+            label2.Text = "автомобили, поиск по гос. номеру:";
+            foreach(DataRow row in dataTable.Rows) {
+               
+                string gos_number = $"{row["гос_номер"]}";
+
+                comboBox1.Items.Add(gos_number);
+            }
+           
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
 
@@ -295,7 +308,7 @@ namespace Sample
                 myLabel.Tag = "DynamicallyGenerated";
                 newTextBox.Tag = "textbox";
 
-
+              
                 if (i == 0) continue;
 
                 Type textBoxType = typeof(TextBox);
@@ -327,7 +340,9 @@ namespace Sample
                     foreach (DataRow row in ownersTable.Rows)
                     {
                         string fullName = $"{row["Фамилия"]} {row["Имя"]} {row["Отчество"]}";
+                    
                         comboBox.Items.Add(fullName);
+                       
                     }
 
                     this.Controls.Add(comboBox);
@@ -441,6 +456,8 @@ namespace Sample
         }
         private void владельцыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            comboBox1.Items.Clear();
+            comboBox1.Text = "";
             foreach (var item in comboFacts)
             {
                 this.Controls.Remove(item);
@@ -479,6 +496,13 @@ namespace Sample
             int k = 0;
             TableNameGlobal = "владельцы";
             codeColumn = "код_владельца";
+            label2.Text = "владельцы:Поиск по категории прав:";
+            foreach (DataRow row in dataTable.Rows)
+            {
+
+                string gos_number = $"{row["Категория_прав"]}";
+                comboBox1.Items.Add(gos_number);
+            }
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 if (i == 0) continue;
@@ -672,6 +696,8 @@ namespace Sample
 
         private void фактыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            comboBox1.Items.Clear();
+            comboBox1.Text = "";
             IndexDate = 0;
             checkavto = 0;
             dataGridView1.Visible = false;
@@ -716,6 +742,13 @@ namespace Sample
             int k = 0;
             TableNameGlobal = "факты_нарушения";
             codeColumn = "код_нарушения";
+            label2.Text = "факт_нарушения:Поиск по фио_водителя:";
+            foreach (DataRow row in dataTable.Rows)
+            {
+          
+                string gos_number = $"{row["фио_водителя"]}";
+                comboBox1.Items.Add(gos_number);
+            }
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 GlobalCounterForDate = i;
@@ -965,7 +998,7 @@ namespace Sample
                     comboBox.Height = 50;
                     comboBox.Tag = "tag" + column.ColumnName;
                     comboBox.Name = "name" + column.ColumnName;
-   
+                    
 
 
                     foreach (DataRow row1 in dataTable1.Rows)
@@ -1066,6 +1099,8 @@ namespace Sample
 
         private void видыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            comboBox1.Items.Clear();
+            comboBox1.Text = "";
             foreach (var item in comboFacts)
             {
                 this.Controls.Remove(item);
@@ -1110,6 +1145,14 @@ namespace Sample
             int k = 0;
             TableNameGlobal = "виды_нарушения";
             codeColumn = "код_вида_нарушения";
+            label2.Text = "вид нарушения, поиск по наименованию:";
+            foreach (DataRow row in dataTable.Rows)
+            {
+
+                string gos_number = $"{row["наименование_вида_нарушения"]}";
+
+                comboBox1.Items.Add(gos_number);
+            }
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 if (i == 0) continue;
@@ -1141,6 +1184,9 @@ namespace Sample
 
         private void инспекторToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            comboBox1.Items.Clear();
+            comboBox1.Text = "";
+
             dataGridView1.Visible = false;
             dataGridView2.Visible = false;
             dataGridView3.Visible = false;
@@ -1183,6 +1229,14 @@ namespace Sample
             int k = 0;
             TableNameGlobal = "Инспектор";
             codeColumn = "код_инспектора";
+            label2.Text = "Инспектор, поиск по ФИО:";
+            foreach (DataRow row in dataTable.Rows)
+            {
+
+                string gos_number = $"{row["фио_инспектора"]}";
+
+                comboBox1.Items.Add(gos_number);
+            }
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 if (i == 0) continue;
@@ -1247,6 +1301,38 @@ namespace Sample
                 labelsString.Add(item.Text);
             }
             AddInDB(labelsString);
+            if (dataGridView4.Visible == true)
+            {
+                arr[3] = true;
+                // controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString()));
+               
+                dataGridView4.DataSource = controller.UpdateInspector();
+
+            }
+            if (dataGridView3.Visible == true)
+            {
+               
+                dataGridView3.DataSource = controller.UpdateFacts();
+            }
+            if (dataGridView2.Visible == true)
+            {
+                //controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[0].Value.ToString()));
+               
+                dataGridView2.DataSource = controller.UpdatePerson();
+                //EditOwner
+            }
+            if (dataGridView1.Visible == true)
+            {
+                arr[0] = true;
+               
+               
+                dataGridView1.DataSource = controller.UpdateCars();
+            }
+            if (dataGridView5.Visible == true)
+            {
+              
+                dataGridView5.DataSource = controller.UpdateVidNarush();
+            }
             labelsString.Clear();
         }
 
@@ -1292,5 +1378,143 @@ namespace Sample
             }
 
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Получаем выбранное значение из ComboBox
+            string selectedValue = comboBox1.SelectedItem.ToString();
+
+            // Выводим значение в MessageBox
+            MessageBox.Show("Выбранное значение: " + selectedValue, "Информация");
+
+            if (dataGridView1.Visible == true)
+            {
+                ApplyFilter(dataGridView1, "гос_номер", selectedValue);
+            }
+
+            if (dataGridView3.Visible == true)
+            {
+                ApplyFilter(dataGridView3, "фио_водителя", selectedValue);
+            }
+
+            if (dataGridView2.Visible == true)
+            {
+                ApplyFilter(dataGridView2, "Категория_прав", selectedValue);
+            }
+
+            if (dataGridView4.Visible == true)
+            {
+                ApplyFilter(dataGridView4, "фио_инспектора", selectedValue);
+            }
+
+            if (dataGridView5.Visible == true)
+            {
+                ApplyFilter(dataGridView5, "наименование_вида_нарушения", selectedValue);
+            }
+        }
+
+        private void ApplyFilter(DataGridView dataGridView, string columnName, string filterValue)
+        {
+            // Проверяем, что DataSource - BindingSource
+            if (dataGridView.DataSource is BindingSource bs)
+            {
+                // Получаем DataView из BindingSource
+                DataView dv = (DataView)bs.List;
+
+                // Применяем фильтр к DataView
+                dv.RowFilter = $"{columnName} = '{filterValue}'";
+            }
+            else if (dataGridView.DataSource is DataTable dt)
+            {
+                // Если DataSource - DataTable, то фильтруем его напрямую
+                dt.DefaultView.RowFilter = $"{columnName} = '{filterValue}'";
+            }
+            else
+            {
+                // Обработка других типов DataSource, если необходимо
+            }
+        }
+
+
+        /*  private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+          {
+              // Получаем выбранное значение из ComboBox
+              string selectedValue = comboBox1.SelectedItem.ToString();
+
+              // Выводим значение в MessageBox
+              MessageBox.Show("Выбранное значение: " + selectedValue, "Информация");
+              if (dataGridView1.Visible == true)
+              {
+                  // Проверяем, что DataSource - BindingSource
+                  if (dataGridView1.DataSource is BindingSource bs)
+                  {
+                      // Получаем DataView из BindingSource
+                      DataView dv = (DataView)bs.List;
+
+                      // Применяем фильтр к DataView
+                      dv.RowFilter = $"гос_номер = '{selectedValue}'";
+                  }
+                  else if (dataGridView1.DataSource is DataTable dt)
+                  {
+                      // Если DataSource - DataTable, то фильтруем его напрямую
+                      dt.DefaultView.RowFilter = $"гос_номер = '{selectedValue}'";
+                  }
+                  else
+                  {
+                      // Обработка других типов DataSource, если необходимо
+                  }
+              }
+
+              if (dataGridView3.Visible == true)
+              {
+                  BindingSource bs = (BindingSource)dataGridView3.DataSource;
+
+                  // Получаем DataView из BindingSource
+                  DataView dv = (DataView)bs.List;
+
+                  // Применяем фильтр к DataView
+                  dv.RowFilter = $"фио_водителя = '{selectedValue}'";
+
+              }
+              if (dataGridView2.Visible == true)
+              {
+                  BindingSource bs = (BindingSource)dataGridView2.DataSource;
+
+                  // Получаем DataView из BindingSource
+                  DataView dv = (DataView)bs.List;
+
+                  // Применяем фильтр к DataView
+                  dv.RowFilter = $"Категория_прав = '{selectedValue}'";
+
+              }
+              if (dataGridView4.Visible == true)
+              {
+                  BindingSource bs = (BindingSource)dataGridView4.DataSource;
+
+                  // Получаем DataView из BindingSource
+                  DataView dv = (DataView)bs.List;
+
+                  // Применяем фильтр к DataView
+                  dv.RowFilter = $"фио_инспектора = '{selectedValue}'";
+
+              }
+              if (dataGridView5.Visible == true)
+              {
+                  BindingSource bs = (BindingSource)dataGridView5.DataSource;
+
+                  // Получаем DataView из BindingSource
+                  DataView dv = (DataView)bs.List;
+
+                  // Применяем фильтр к DataView
+                  dv.RowFilter = $"наименование_вида_нарушения = '{selectedValue}'";
+
+              }
+
+          }*/
+
     }
 }
