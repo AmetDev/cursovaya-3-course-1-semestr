@@ -64,8 +64,35 @@ namespace Sample
 
         private void button3_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(TableNameGlobal);
+            MessageBox.Show(codeColumn);
+            if (dataGridView4.Visible == true)
+            {
+                controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString()));
+                dataGridView4.DataSource = controller.UpdateInspector();
+            }
+            if(dataGridView3.Visible==true)
+            {
+                controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[0].Value.ToString()));
+                dataGridView3.DataSource = controller.UpdateFacts();
+            }
+            if (dataGridView2.Visible == true)
+            {
+                controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[0].Value.ToString()));
+                dataGridView2.DataSource = controller.UpdatePerson();
+            }
+            if (dataGridView1.Visible == true)
+            {
+                controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()));
+                dataGridView1.DataSource = controller.UpdateCars();
+            }
+            if (dataGridView5.Visible == true)
+            {
+                controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView5.Rows[dataGridView5.CurrentRow.Index].Cells[0].Value.ToString()));
+                dataGridView5.DataSource = controller.UpdateVidNarush();
+            }
 
-            controller.DeleteAll(TableNameGlobal, int.Parse(dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString()));
+
 
 
         }
@@ -128,6 +155,7 @@ namespace Sample
         MonthCalendar dynamicMonthCalendar = new MonthCalendar();
         Button btnDate = new Button();
         List<Button> btns = new List<Button>();
+        string codeColumn="";
         int checkavto=0;
 
         int avtocode = 0;
@@ -160,9 +188,6 @@ namespace Sample
 
 
         }
-
-
-
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
@@ -237,6 +262,7 @@ namespace Sample
             dataAdapter.Fill(dataTable);
             int k = 0;
             TableNameGlobal = "автомобили";
+            codeColumn = "код_автомобиля";
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
 
@@ -347,7 +373,6 @@ namespace Sample
             }
             
         }
-
         private void AddInDB(List<string> argsLablesString)
         {
            
@@ -424,7 +449,7 @@ namespace Sample
             dataAdapter.Fill(dataTable);
             int k=0;
             TableNameGlobal = "владельцы";
-
+            codeColumn = "код_владельца";
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 if (i == 0) continue;
@@ -465,8 +490,7 @@ namespace Sample
 
             // Извлекаем значение column.ColumnName из свойства Tag
             string columnName = clickedButton.Tag as string;
-            MessageBox.Show(columnName + "");            // Теперь у вас есть значение column.ColumnName, которое можно использовать
-            // например, вывести его в консоль или передать в другую функцию
+            MessageBox.Show(columnName + "");    
            
             switch (columnName)
             {
@@ -521,9 +545,6 @@ namespace Sample
             textBoxLabel.Clear();
             labelsString.Clear();
             this.Controls.Remove(dynamicMonthCalendar);
-
-
-
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
 
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select * From факты_нарушения", con);
@@ -531,7 +552,7 @@ namespace Sample
             dataAdapter.Fill(dataTable);
             int k = 0;
             TableNameGlobal = "факты_нарушения";
-     
+            codeColumn = "код_нарушения";
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 GlobalCounterForDate = i;
@@ -632,9 +653,6 @@ namespace Sample
                             MessageBox.Show($"Выбрано с кодом {list[selectedIndex]} ");
 
                             vidnarish = list[selectedIndex];
-
-
-
                         }
                     };
 
@@ -830,7 +848,7 @@ namespace Sample
             }
         }
 
-            private void видыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void видыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dataGridView1.Visible = false;
             dataGridView2.Visible = false;
@@ -864,7 +882,6 @@ namespace Sample
             this.Controls.Remove(dynamicMonthCalendar);
 
 
-
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
 
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select * From виды_нарушения", con);
@@ -872,7 +889,7 @@ namespace Sample
             dataAdapter.Fill(dataTable);
             int k = 0;
             TableNameGlobal = "виды_нарушения";
-
+            codeColumn = "код_вида_нарушения";
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 if (i == 0) continue;
@@ -899,13 +916,11 @@ namespace Sample
                 textBoxLabel.Add(newTextBox);
             }
 
-         
             //AddVid_Narush
         }
 
         private void инспекторToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             dataGridView1.Visible = false;
             dataGridView2.Visible = false;
             dataGridView3.Visible = false;
@@ -936,9 +951,6 @@ namespace Sample
             textBoxLabel.Clear();
             labelsString.Clear();
             this.Controls.Remove(dynamicMonthCalendar);
-
-
-
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
 
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select * From Инспектор", con);
@@ -946,7 +958,7 @@ namespace Sample
             dataAdapter.Fill(dataTable);
             int k = 0;
             TableNameGlobal = "Инспектор";
-
+            codeColumn = "код_инспектора";
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 if (i == 0) continue;
@@ -1009,13 +1021,9 @@ namespace Sample
             foreach (var item in textBoxLabel)
             {
                 labelsString.Add(item.Text);
-     
             }
             AddInDB(labelsString);
             labelsString.Clear();
-
-
-
         }
 
         private void button7_Click(object sender, EventArgs e)

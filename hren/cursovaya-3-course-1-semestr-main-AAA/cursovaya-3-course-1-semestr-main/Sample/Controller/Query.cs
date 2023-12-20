@@ -69,14 +69,15 @@ namespace Sample.Controller
             connection.Close();
             return bufferTable;
         }
-        public void DeleteAll(string arg, int ID)
+        
+        public void DeleteAll(string column, string arg, int ID)
         {
             try
             {
                 MessageBox.Show(arg);
                 MessageBox.Show(Convert.ToString(ID));
                 connection.Open();
-                command = new OleDbCommand($"DELETE FROM {arg} WHERE ID = {ID}", connection);
+                command = new OleDbCommand($"DELETE FROM {arg} WHERE {column} = {ID}", connection);
                 command.ExecuteNonQuery();
                 connection.Close();
             } catch (Exception ex)
@@ -194,13 +195,13 @@ namespace Sample.Controller
             return bufferTable;
         }
 
-        public void Delete(int ID)
+      /*  public void Delete(int ID)
         {
             connection.Open();
             command = new OleDbCommand($"DELETE FROM Teachers WHERE ID = {ID}", connection);
             command.ExecuteNonQuery();
             connection.Close();
-        }
+        }*/
         public void DeleteUsers(int ID)
         {
             connection.Open();
