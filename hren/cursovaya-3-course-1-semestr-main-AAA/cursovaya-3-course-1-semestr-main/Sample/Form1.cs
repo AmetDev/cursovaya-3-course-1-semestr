@@ -152,7 +152,7 @@ namespace Sample
         bool isClickBtnDate = false;
         MonthCalendar dynamicMonthCalendar = new MonthCalendar();
         Button btnDate = new Button();
-
+      
         List<Button> btns = new List<Button>();
         List<ComboBox> comboFacts = new List<ComboBox>();
         string codeColumn = "";
@@ -186,6 +186,7 @@ namespace Sample
         }
         void textBox_Enter(object sender, EventArgs e)
         {
+
             // Get the TextBox that received focus
             Button btn = sender as Button;
             MessageBox.Show(btn.Name + " Clicked"); // Display TextBox details
@@ -242,12 +243,22 @@ namespace Sample
 
         private void автомобилиToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = автомобилиBindingSource;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
 
 
-            checkavto = 1;
+
+            comboBox1.Items.Clear();
+            comboBox1.Text = "";
             IndexDate = 0;
+            checkavto = 0;
+            dataGridView1.Visible = false;
+            dataGridView2.Visible = false;
+            dataGridView3.Visible = true;
+            dataGridView4.Visible = false;
+            dataGridView5.Visible = false;
+            arrBoolStateManager[2] = true;
             foreach (var item in comboFacts)
             {
                 this.Controls.Remove(item);
@@ -387,6 +398,7 @@ namespace Sample
                     this.Controls.Remove(newTextBox);
                 }
             }
+            btnDate.Click += new EventHandler(this.textBox_Enter);
 
 
 
@@ -455,6 +467,7 @@ namespace Sample
         }
         private void владельцыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView2.DataSource = владельцыBindingSource;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
             foreach (var item in comboFacts)
@@ -695,6 +708,7 @@ namespace Sample
 
         private void фактыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView3.DataSource = фактынарушенияBindingSource;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
             IndexDate = 0;
@@ -1047,8 +1061,6 @@ namespace Sample
                 }
 
 
-
-
                 TextBox newTextBox = new TextBox();
                 newTextBox.Name = "textBox " + column.ColumnName;
                 newTextBox.Location = new Point(600, 10 + k);
@@ -1070,8 +1082,6 @@ namespace Sample
                     btnDate.Location = new System.Drawing.Point(695, 10 + k);
                     btnDate.Click += new EventHandler(this.textBox_Enter);
                     this.Controls.Add(btnDate);
-
-
                 }
                 // Добавляем все кнопки в Controls только после того, как им добавлен обработчик
                 foreach (var item in btns)
@@ -1098,6 +1108,7 @@ namespace Sample
 
         private void видыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView5.DataSource = видынарушенияBindingSource;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
             foreach (var item in comboFacts)
@@ -1183,6 +1194,7 @@ namespace Sample
 
         private void инспекторToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView4.DataSource = инспекторBindingSource;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
 
@@ -1421,6 +1433,7 @@ namespace Sample
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             // Получаем выбранное значение из ComboBox
             string selectedValue = comboBox1.SelectedItem.ToString();
             // Определите активный DataGridView
