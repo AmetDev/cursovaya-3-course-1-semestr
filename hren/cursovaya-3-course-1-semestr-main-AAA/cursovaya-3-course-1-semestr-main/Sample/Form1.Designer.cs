@@ -154,35 +154,35 @@
             // автомобилиToolStripMenuItem
             // 
             this.автомобилиToolStripMenuItem.Name = "автомобилиToolStripMenuItem";
-            this.автомобилиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.автомобилиToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.автомобилиToolStripMenuItem.Text = "автомобили";
             this.автомобилиToolStripMenuItem.Click += new System.EventHandler(this.автомобилиToolStripMenuItem_Click);
             // 
             // владельцыToolStripMenuItem
             // 
             this.владельцыToolStripMenuItem.Name = "владельцыToolStripMenuItem";
-            this.владельцыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.владельцыToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.владельцыToolStripMenuItem.Text = "владельцы";
             this.владельцыToolStripMenuItem.Click += new System.EventHandler(this.владельцыToolStripMenuItem_Click);
             // 
             // фактыНарушенияToolStripMenuItem
             // 
             this.фактыНарушенияToolStripMenuItem.Name = "фактыНарушенияToolStripMenuItem";
-            this.фактыНарушенияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.фактыНарушенияToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.фактыНарушенияToolStripMenuItem.Text = "факты нарушения";
             this.фактыНарушенияToolStripMenuItem.Click += new System.EventHandler(this.фактыНарушенияToolStripMenuItem_Click);
             // 
             // видыНарушенияToolStripMenuItem
             // 
             this.видыНарушенияToolStripMenuItem.Name = "видыНарушенияToolStripMenuItem";
-            this.видыНарушенияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.видыНарушенияToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.видыНарушенияToolStripMenuItem.Text = "виды нарушения";
             this.видыНарушенияToolStripMenuItem.Click += new System.EventHandler(this.видыНарушенияToolStripMenuItem_Click);
             // 
             // инспекторToolStripMenuItem
             // 
             this.инспекторToolStripMenuItem.Name = "инспекторToolStripMenuItem";
-            this.инспекторToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.инспекторToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.инспекторToolStripMenuItem.Text = "инспектор";
             this.инспекторToolStripMenuItem.Click += new System.EventHandler(this.инспекторToolStripMenuItem_Click);
             // 
@@ -377,7 +377,7 @@
             this.кодинспектораDataGridViewTextBoxColumn1,
             this.фиоинспектораDataGridViewTextBoxColumn});
             this.dataGridView4.DataSource = this.инспекторBindingSource;
-            this.dataGridView4.Location = new System.Drawing.Point(23, 37);
+            this.dataGridView4.Location = new System.Drawing.Point(12, 128);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(552, 342);
             this.dataGridView4.TabIndex = 18;
@@ -409,7 +409,7 @@
             this.наименованиевиданарушенияDataGridViewTextBoxColumn,
             this.размерШтрафаDataGridViewTextBoxColumn});
             this.dataGridView5.DataSource = this.видынарушенияBindingSource;
-            this.dataGridView5.Location = new System.Drawing.Point(23, 37);
+            this.dataGridView5.Location = new System.Drawing.Point(23, 116);
             this.dataGridView5.Name = "dataGridView5";
             this.dataGridView5.Size = new System.Drawing.Size(552, 342);
             this.dataGridView5.TabIndex = 19;

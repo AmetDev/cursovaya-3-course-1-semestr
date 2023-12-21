@@ -152,6 +152,7 @@ namespace Sample
         bool isClickBtnDate = false;
         MonthCalendar dynamicMonthCalendar = new MonthCalendar();
         Button btnDate = new Button();
+
         List<Button> btns = new List<Button>();
         List<ComboBox> comboFacts = new List<ComboBox>();
         string codeColumn = "";
@@ -293,7 +294,8 @@ namespace Sample
 
                 comboBox1.Items.Add(gos_number);
             }
-           
+       
+
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
 
@@ -361,7 +363,7 @@ namespace Sample
                     btnDate.Tag = "DynamicallyGenerated";
                     btnDate.Size = new System.Drawing.Size(100, 25);
                     btnDate.Location = new System.Drawing.Point(700, -51 + k);
-                    btnDate.Click += new EventHandler(this.textBox_Enter);
+                  
                     this.Controls.Add(btnDate);
 
 
@@ -1356,7 +1358,7 @@ namespace Sample
             }
             if (dataGridView3.Visible == true)
             {
-                EditFacts(int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[0].Value.ToString()));
+                EditFacts(int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[3].Value.ToString()));
                 dataGridView3.DataSource = controller.UpdateFacts();
             }
             if (dataGridView2.Visible == true)
