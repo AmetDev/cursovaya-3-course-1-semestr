@@ -65,19 +65,37 @@ namespace Sample.Controller
             connection.Close();
         }
 
-        public void UpdateFactsInDB(int zero, int avto, int insector, int vlad, int vid, string data, string fio, bool right=false)
+        public void UpdateFactsInDB(int zero, int avto, int insector, int vlad, int vid, string data, string fio)
+      
         {
-            connection.Open();
-            command = new OleDbCommand($"UPDATE факты_нарушения SET код_инспектора = @insector, код_владельца = @vlad, код_вида_нарушения = @vid, дата_нарушения = @data, фио_водителя = @fio, [право управления] = @right WHERE код_владельца = {zero}", connection);
-            command.Parameters.AddWithValue("@avto", avto);
-            command.Parameters.AddWithValue("@insector", insector);
-            command.Parameters.AddWithValue("@vlad", vlad);
-            command.Parameters.AddWithValue("@vid", vid);
-            command.Parameters.AddWithValue("@data", data);
-            command.Parameters.AddWithValue("@fio", fio);
-            command.Parameters.AddWithValue("@right", right);
-            command.ExecuteNonQuery();
-            connection.Close();
+            try
+            {
+                bool right = false;
+
+                connection.Open();
+                command = new OleDbCommand($"UPDATE факты_нарушения SET код_инспектора = @insector, код_владельца = @vlad, код_вида_нарушения = @vid, дата_нарушения = @data, фио_водителя = @fio, [право управления] = @right WHERE код_нарушения = {zero}", connection);
+                command.Parameters.AddWithValue("@avto", avto);
+                command.Parameters.AddWithValue("@insector", insector);
+                command.Parameters.AddWithValue("@vlad", vlad);
+                command.Parameters.AddWithValue("@vid", vid);
+                command.Parameters.AddWithValue("@data", data);
+                command.Parameters.AddWithValue("@fio", fio);
+                command.Parameters.AddWithValue("@right", right);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                // Обработка ошибки. Вы можете вывести сообщение об ошибке или записать в лог.
+               MessageBox.Show("Произошла ошибка: " + ex.Message);
+            }
+            finally
+            {
+                // Убедитесь, что соединение закрывается, даже если произошла ошибка
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
         }
 
 

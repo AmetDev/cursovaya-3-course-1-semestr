@@ -176,13 +176,13 @@ namespace Sample
         private void DynamicMonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
             // MessageBox.Show("INDEX"+ IndexDate);
+            
             int IndexDate1 = IndexDate - checkavto;
             textBoxLabel[IndexDate1].Text = e.Start.ToShortDateString().ToString();
             datanarish = e.Start.ToShortDateString().ToString();
             //MessageBox.Show($"Selected Date: {e.Start.ToShortDateString()}");
             this.Controls.Remove(dynamicMonthCalendar);
-            IndexDate = 0;
-            checkavto = 0;
+           
         }
         void textBox_Enter(object sender, EventArgs e)
         {
@@ -243,6 +243,7 @@ namespace Sample
 
         private void автомобилиToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            button7.Visible = true;
             dataGridView1.DataSource = автомобилиBindingSource;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
@@ -309,7 +310,7 @@ namespace Sample
 
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
-
+                int counterTextBox = 0;
                 GlobalCounterForDate = i;
                 k += 45;
                 Label myLabel = new Label();
@@ -325,11 +326,7 @@ namespace Sample
                 DataColumn column = dataTable.Columns[i];
                 Type columnType = column.DataType;
 
-                if ("textbox" == newTextBox.Tag)
-                {
-                    counterTextBox += 1;
-                    // Your code here
-                }
+               
                 if (i == 1)
                 {
                     IndexCodeOwner = i;
@@ -354,31 +351,32 @@ namespace Sample
                         comboBox.Items.Add(fullName);
                        
                     }
-
                     this.Controls.Add(comboBox);
                     comboBoxes.Add(comboBox);
-
-
-
                 }
-
 
                 if (columnType == typeof(DateTime))
                 {
-                    IndexDate = counterTextBox;
+                    IndexDate = 3;
 
-                    dynamicMonthCalendar.Location = new System.Drawing.Point(750, 60 + k);
+                    dynamicMonthCalendar.Location = new System.Drawing.Point(750, -50 + k);
                     dynamicMonthCalendar.Size = new System.Drawing.Size(200, 180);
                     btnDate.Name = "date";
                     btnDate.Text = "выберите дату";
                     btnDate.Tag = "DynamicallyGenerated";
                     btnDate.Size = new System.Drawing.Size(100, 25);
-                    btnDate.Location = new System.Drawing.Point(700, -51 + k);
-                  
+                    btnDate.Location = new System.Drawing.Point(698, -52 + k);
+                    btnDate.Click += new EventHandler(this.textBox_Enter);
                     this.Controls.Add(btnDate);
-
-
                 }
+                // Добавляем все кнопки в Controls только после того, как им добавлен обработчик
+                foreach (var item in btns)
+                {
+                    this.Controls.Add(item);
+                }
+
+                // Если столбец не соответствует условиям, добавляем Label и TextBox
+
                 newTextBox.Name = "textBox " + column;
                 newTextBox.Location = new Point(600, -50 + k);
                 newTextBox.Tag = "DynamicallyGenerated";
@@ -398,7 +396,7 @@ namespace Sample
                     this.Controls.Remove(newTextBox);
                 }
             }
-            btnDate.Click += new EventHandler(this.textBox_Enter);
+          
 
 
 
@@ -467,6 +465,7 @@ namespace Sample
         }
         private void владельцыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            button7.Visible = true;
             dataGridView2.DataSource = владельцыBindingSource;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
@@ -539,6 +538,7 @@ namespace Sample
                 labels.Add(myLabel);
                 textBoxLabel.Add(newTextBox);
             }
+
 
 
             dataGridView1.Visible = false;
@@ -680,6 +680,7 @@ namespace Sample
         }
         private void EditFacts(int ID)
         {
+            MessageBox.Show($"ID{ID}");
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=Test.mdb");
 
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter($"Select * From факты_нарушения WHERE код_нарушения={ID}", con);
@@ -708,7 +709,9 @@ namespace Sample
 
         private void фактыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             dataGridView3.DataSource = фактынарушенияBindingSource;
+            button7.Visible = false;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
             IndexDate = 0;
@@ -1060,7 +1063,7 @@ namespace Sample
               
                 }
 
-
+                
                 TextBox newTextBox = new TextBox();
                 newTextBox.Name = "textBox " + column.ColumnName;
                 newTextBox.Location = new Point(600, 10 + k);
@@ -1108,6 +1111,7 @@ namespace Sample
 
         private void видыНарушенияToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            button7.Visible = true;
             dataGridView5.DataSource = видынарушенияBindingSource;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
@@ -1194,6 +1198,7 @@ namespace Sample
 
         private void инспекторToolStripMenuItem_Click(object sender, EventArgs e)
         {
+              button7.Visible = true;
             dataGridView4.DataSource = инспекторBindingSource;
             comboBox1.Items.Clear();
             comboBox1.Text = "";
@@ -1363,6 +1368,7 @@ namespace Sample
             if (dataGridView4.Visible == true)
             {
                 arr[3] = true;
+               
                 // controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString()));
                 EditInspector(int.Parse(dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString()));
                 dataGridView4.DataSource = controller.UpdateInspector();
@@ -1370,11 +1376,15 @@ namespace Sample
             }
             if (dataGridView3.Visible == true)
             {
-                EditFacts(int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[3].Value.ToString()));
+
+                //EditFacts(int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[0].Value.ToString()));
+             
                 dataGridView3.DataSource = controller.UpdateFacts();
+              
             }
             if (dataGridView2.Visible == true)
             {
+               
                 //controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[0].Value.ToString()));
                 EditVladelez(int.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[0].Value.ToString()));
                 dataGridView2.DataSource = controller.UpdatePerson();
@@ -1385,11 +1395,13 @@ namespace Sample
                 arr[0] = true;
                 /* controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()));
                  dataGridView1.DataSource = controller.UpdateCars();*/
+              
                 EditAvto(int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()));
                 dataGridView1.DataSource = controller.UpdateCars();
             }
             if (dataGridView5.Visible == true)
             {
+              
                 EditVid(int.Parse(dataGridView5.Rows[dataGridView5.CurrentRow.Index].Cells[0].Value.ToString()));
                 dataGridView5.DataSource = controller.UpdateVidNarush();
             }
