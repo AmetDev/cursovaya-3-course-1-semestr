@@ -89,5 +89,10 @@ namespace Sample
             EditAvto(Convert.ToInt32(ownerCode), model, licensePlate, productionDate);
             Close();
         }
+
+        private void EditForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

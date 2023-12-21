@@ -377,7 +377,7 @@
             this.кодинспектораDataGridViewTextBoxColumn1,
             this.фиоинспектораDataGridViewTextBoxColumn});
             this.dataGridView4.DataSource = this.инспекторBindingSource;
-            this.dataGridView4.Location = new System.Drawing.Point(12, 128);
+            this.dataGridView4.Location = new System.Drawing.Point(23, 37);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(552, 342);
             this.dataGridView4.TabIndex = 18;
@@ -550,6 +550,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Учет нарушений правил дорожного движения";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);

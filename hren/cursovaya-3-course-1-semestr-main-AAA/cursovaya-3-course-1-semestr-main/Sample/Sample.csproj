@@ -123,6 +123,15 @@
     <EmbeddedResource Include="CheckAdmin.resx">
       <DependentUpon>CheckAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditForm.resx">
+      <DependentUpon>EditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditInspector.resx">
+      <DependentUpon>EditInspector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditVid.resx">
+      <DependentUpon>EditVid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
