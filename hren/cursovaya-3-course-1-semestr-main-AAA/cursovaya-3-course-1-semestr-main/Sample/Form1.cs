@@ -52,10 +52,7 @@ namespace Sample
             dataGridView5.Visible = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -1300,6 +1297,12 @@ namespace Sample
             {
                 labelsString.Add(item.Text);
             }
+            dataGridView4.DataSource = controller.UpdateInspector();
+            dataGridView3.DataSource = controller.UpdateFacts();
+            dataGridView2.DataSource = controller.UpdatePerson();
+            dataGridView1.DataSource = controller.UpdateCars();
+            dataGridView5.DataSource = controller.UpdateVidNarush();
+
             AddInDB(labelsString);
             if (dataGridView4.Visible == true)
             {
@@ -1359,7 +1362,7 @@ namespace Sample
             if (dataGridView2.Visible == true)
             {
                 //controller.DeleteAll(codeColumn, TableNameGlobal, int.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[0].Value.ToString()));
-                EditVladelez(int.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[3].Value.ToString()));
+                EditVladelez(int.Parse(dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[0].Value.ToString()));
                 dataGridView2.DataSource = controller.UpdatePerson();
                 //EditOwner
             }
@@ -1378,15 +1381,48 @@ namespace Sample
             }
 
         }
+        private DataGridView activeDataGridView;
+
 
         private void label2_Click(object sender, EventArgs e)
         {
 
         }
+        private DataGridView GetActiveDataGridView()
+        {
+            // Определите активный DataGridView в зависимости от текущего контекста приложения
+            // Например, используя видимость компонентов
+
+            if (dataGridView1.Visible)
+            {
+                return dataGridView1;
+            }
+            else if (dataGridView2.Visible)
+            {
+                return dataGridView2;
+            }
+            else if (dataGridView3.Visible)
+            {
+                return dataGridView3;
+            }
+            else if (dataGridView4.Visible)
+            {
+                return dataGridView4;
+            }
+            else if (dataGridView5.Visible)
+            {
+                return dataGridView5;
+            }
+
+            return null; // Если активный DataGridView не определен
+        }
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Получаем выбранное значение из ComboBox
             string selectedValue = comboBox1.SelectedItem.ToString();
+            // Определите активный DataGridView
+            activeDataGridView = GetActiveDataGridView();
 
             // Выводим значение в MessageBox
             MessageBox.Show("Выбранное значение: " + selectedValue, "Информация");
@@ -1439,82 +1475,40 @@ namespace Sample
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            comboBox1.Text = "";
+            activeDataGridView = GetActiveDataGridView();
+            ResetFilter(activeDataGridView);
+        }
 
-        /*  private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-          {
-              // Получаем выбранное значение из ComboBox
-              string selectedValue = comboBox1.SelectedItem.ToString();
+        private void ResetFilter(DataGridView dataGridView)
+        {
+            // Очистить фильтр для указанного DataGridView
+            // Проверяем, что DataSource - BindingSource
+            if (dataGridView.DataSource is BindingSource bs)
+            {
+                // Получаем DataView из BindingSource
+                DataView dv = (DataView)bs.List;
 
-              // Выводим значение в MessageBox
-              MessageBox.Show("Выбранное значение: " + selectedValue, "Информация");
-              if (dataGridView1.Visible == true)
-              {
-                  // Проверяем, что DataSource - BindingSource
-                  if (dataGridView1.DataSource is BindingSource bs)
-                  {
-                      // Получаем DataView из BindingSource
-                      DataView dv = (DataView)bs.List;
+                // Очищаем фильтр у DataView
+                dv.RowFilter = string.Empty;
+            }
+            else if (dataGridView.DataSource is DataTable dt)
+            {
+                // Если DataSource - DataTable, то сбрасываем фильтр напрямую
+                dt.DefaultView.RowFilter = string.Empty;
+            }
+            else
+            {
+                // Обработка других типов DataSource, если необходимо
+            }
+        }
 
-                      // Применяем фильтр к DataView
-                      dv.RowFilter = $"гос_номер = '{selectedValue}'";
-                  }
-                  else if (dataGridView1.DataSource is DataTable dt)
-                  {
-                      // Если DataSource - DataTable, то фильтруем его напрямую
-                      dt.DefaultView.RowFilter = $"гос_номер = '{selectedValue}'";
-                  }
-                  else
-                  {
-                      // Обработка других типов DataSource, если необходимо
-                  }
-              }
-
-              if (dataGridView3.Visible == true)
-              {
-                  BindingSource bs = (BindingSource)dataGridView3.DataSource;
-
-                  // Получаем DataView из BindingSource
-                  DataView dv = (DataView)bs.List;
-
-                  // Применяем фильтр к DataView
-                  dv.RowFilter = $"фио_водителя = '{selectedValue}'";
-
-              }
-              if (dataGridView2.Visible == true)
-              {
-                  BindingSource bs = (BindingSource)dataGridView2.DataSource;
-
-                  // Получаем DataView из BindingSource
-                  DataView dv = (DataView)bs.List;
-
-                  // Применяем фильтр к DataView
-                  dv.RowFilter = $"Категория_прав = '{selectedValue}'";
-
-              }
-              if (dataGridView4.Visible == true)
-              {
-                  BindingSource bs = (BindingSource)dataGridView4.DataSource;
-
-                  // Получаем DataView из BindingSource
-                  DataView dv = (DataView)bs.List;
-
-                  // Применяем фильтр к DataView
-                  dv.RowFilter = $"фио_инспектора = '{selectedValue}'";
-
-              }
-              if (dataGridView5.Visible == true)
-              {
-                  BindingSource bs = (BindingSource)dataGridView5.DataSource;
-
-                  // Получаем DataView из BindingSource
-                  DataView dv = (DataView)bs.List;
-
-                  // Применяем фильтр к DataView
-                  dv.RowFilter = $"наименование_вида_нарушения = '{selectedValue}'";
-
-              }
-
-          }*/
-
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            AboutBox1 ss = new AboutBox1();
+            ss.Show();
+        }
     }
 }
