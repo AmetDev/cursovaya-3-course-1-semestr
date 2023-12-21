@@ -101,7 +101,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(799, 83);
+            this.button3.Location = new System.Drawing.Point(900, 87);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(204, 23);
             this.button3.TabIndex = 3;
@@ -111,7 +111,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(799, 151);
+            this.button4.Location = new System.Drawing.Point(900, 155);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(203, 26);
             this.button4.TabIndex = 8;
@@ -121,7 +121,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(799, 112);
+            this.button5.Location = new System.Drawing.Point(900, 116);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(204, 33);
             this.button5.TabIndex = 13;
@@ -154,35 +154,35 @@
             // автомобилиToolStripMenuItem
             // 
             this.автомобилиToolStripMenuItem.Name = "автомобилиToolStripMenuItem";
-            this.автомобилиToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.автомобилиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.автомобилиToolStripMenuItem.Text = "автомобили";
             this.автомобилиToolStripMenuItem.Click += new System.EventHandler(this.автомобилиToolStripMenuItem_Click);
             // 
             // владельцыToolStripMenuItem
             // 
             this.владельцыToolStripMenuItem.Name = "владельцыToolStripMenuItem";
-            this.владельцыToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.владельцыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.владельцыToolStripMenuItem.Text = "владельцы";
             this.владельцыToolStripMenuItem.Click += new System.EventHandler(this.владельцыToolStripMenuItem_Click);
             // 
             // фактыНарушенияToolStripMenuItem
             // 
             this.фактыНарушенияToolStripMenuItem.Name = "фактыНарушенияToolStripMenuItem";
-            this.фактыНарушенияToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.фактыНарушенияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.фактыНарушенияToolStripMenuItem.Text = "факты нарушения";
             this.фактыНарушенияToolStripMenuItem.Click += new System.EventHandler(this.фактыНарушенияToolStripMenuItem_Click);
             // 
             // видыНарушенияToolStripMenuItem
             // 
             this.видыНарушенияToolStripMenuItem.Name = "видыНарушенияToolStripMenuItem";
-            this.видыНарушенияToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.видыНарушенияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.видыНарушенияToolStripMenuItem.Text = "виды нарушения";
             this.видыНарушенияToolStripMenuItem.Click += new System.EventHandler(this.видыНарушенияToolStripMenuItem_Click);
             // 
             // инспекторToolStripMenuItem
             // 
             this.инспекторToolStripMenuItem.Name = "инспекторToolStripMenuItem";
-            this.инспекторToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.инспекторToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.инспекторToolStripMenuItem.Text = "инспектор";
             this.инспекторToolStripMenuItem.Click += new System.EventHandler(this.инспекторToolStripMenuItem_Click);
             // 
@@ -440,7 +440,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(799, 27);
+            this.button6.Location = new System.Drawing.Point(900, 31);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(203, 26);
             this.button6.TabIndex = 21;
@@ -470,7 +470,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(799, 59);
+            this.button7.Location = new System.Drawing.Point(900, 63);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(204, 23);
             this.button7.TabIndex = 22;
@@ -481,7 +481,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(809, 214);
+            this.comboBox1.Location = new System.Drawing.Point(910, 218);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(192, 21);
             this.comboBox1.TabIndex = 23;
@@ -490,7 +490,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(813, 198);
+            this.label1.Location = new System.Drawing.Point(904, 202);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 24;
@@ -499,7 +499,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(848, 198);
+            this.label2.Location = new System.Drawing.Point(949, 202);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 25;
@@ -508,7 +508,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(809, 240);
+            this.button1.Location = new System.Drawing.Point(910, 244);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(190, 23);
             this.button1.TabIndex = 26;
@@ -518,7 +518,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(860, 269);
+            this.button2.Location = new System.Drawing.Point(961, 273);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(99, 28);
             this.button2.TabIndex = 27;

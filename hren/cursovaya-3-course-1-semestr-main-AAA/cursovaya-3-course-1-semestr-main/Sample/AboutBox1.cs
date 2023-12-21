@@ -15,9 +15,9 @@ namespace Sample
         {
             InitializeComponent();
             this.Text = String.Format("О программе {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
+            this.labelProductName.Text = "Учет нарушений правил дорожного движения";
             this.labelVersion.Text = String.Format("Версия {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
+            this.labelCopyright.Text = "Автор: Сейдалиев А.Э.";
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = String.Format("Программа позволяет пользователю открывать таблицы с данными о нарушениях, выполнять удаление, редактирование, обновление и добавление новых данных.Это обеспечивает возможность ведения учета нарушений и обеспечивает удобный доступ к информации.");
         }
@@ -108,6 +108,11 @@ namespace Sample
         }
 
         private void labelCopyright_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelProductName_Click(object sender, EventArgs e)
         {
 
         }
