@@ -189,7 +189,7 @@ namespace Sample
 
             // Get the TextBox that received focus
             Button btn = sender as Button;
-            MessageBox.Show(btn.Name + " Clicked"); // Display TextBox details
+           // MessageBox.Show(btn.Name + " Clicked"); // Display TextBox details
 
             this.Controls.Add(dynamicMonthCalendar);
 
